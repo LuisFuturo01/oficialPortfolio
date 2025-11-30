@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Code, Cpu, Zap, Moon, Sun, Globe, Github, Linkedin, Mail, User, BookOpen, Download, FileText, Server, PenTool, GitBranch, Database, Cloud, ArrowRight, ExternalLink, Instagram, MessageCircle, Eye } from 'lucide-react';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
 import NotFound from './components/NotFound';
 import emailjs from "emailjs-com";
 import profileimg from './assets/images/profile.jpeg';
