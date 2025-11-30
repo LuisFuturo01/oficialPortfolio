@@ -25,7 +25,7 @@ const portfolioData = {
             p1: "Soy Luis Alejandro Zeballos Quiroz, tengo 19 años y soy de Bolivia. Mi pasión es el desarrollo de software. He dedicado los últimos años a aprender y dominar las tecnologías que mueven la web hoy en día.",
             p2: "No me conformo con que las cosas funcionen; busco entender el porqué detrás de cada línea de código. Estoy listo para integrarme a equipos y aportar valor desde el primer día.",
             stats: [
-                { label: "Años de Práctica", value: "3+" },
+                { label: "Años de Práctica", value: "1+" },
                 { label: "Tecnologías", value: "20+" },
                 { label: "Disponibilidad", value: "100%" },
             ]
@@ -583,7 +583,7 @@ const App = () => {
                     <Route path="/skills" element={<SkillsGraph {...commonProps} />} />
                     <Route path="/projects" element={<ProjectsConsole {...commonProps} />} />
                     <Route path="/contact" element={<ContactSection {...commonProps} />} />
-                    <Route path="*" element={<NotFound {...commonProps} />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>
             
