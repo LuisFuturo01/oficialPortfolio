@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-// IMPORTANTE: Asegúrate de tener instalado react-router-dom, emailjs-com y react-helmet-async
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Code, Cpu, Zap, Moon, Sun, Globe, Github, Linkedin, Mail, User, BookOpen, Download, FileText, Server, PenTool, GitBranch, Database, Cloud, ArrowRight, ExternalLink, Instagram, MessageCircle, Eye } from 'lucide-react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
@@ -7,6 +6,8 @@ import NotFound from './components/NotFound';
 import emailjs from "emailjs-com";
 import profileimg from './assets/images/profile.jpeg';
 import './styles.scss';
+
+
 
 
 const CV_URL = "./assets/documentos/cv_luis_zeballos.pdf"; 
@@ -408,18 +409,30 @@ const ContactSection = ({ content }) => {
                 }
             );
     };
+    useEffect(() => {
+    document.title = "Contacto | Luis Zeballos";
 
-    return (
-        <section id="contact" className="section-container">
-            <Helmet>
-                <title>Contacto | Luis Zeballos</title>
-                <meta name="description" content="Ponte en contacto conmigo para colaborar en proyectos de desarrollo web." />
-            </Helmet>
-            <RevealOnScroll>
-                <div className="contact-box">
-                    <div className="contact-glow-line"></div>
-                    <h2 className="contact-title">{content.contact.title}</h2>
-                    <p className="contact-subtitle">{content.contact.subtitle}</p>
+    const desc = document.querySelector("meta[name='description']");
+    if (desc) {
+        desc.setAttribute(
+            "content",
+            "Ponte en contacto conmigo para colaborar en proyectos de desarrollo web."
+        );
+    } else {
+        const meta = document.createElement("meta");
+        meta.name = "description";
+        meta.content = "Ponte en contacto conmigo para colaborar en proyectos de desarrollo web.";
+        document.head.appendChild(meta);
+    }
+}, []);
+   return (
+    <section id="contact" className="section-container">
+        <RevealOnScroll>
+            <div className="contact-box">
+                <div className="contact-glow-line"></div>
+                <h2 className="contact-title">{content.contact.title}</h2>
+                <p className="contact-subtitle">{content.contact.subtitle}</p>
+
                     
                     <div className="social-buttons-container">
                         <a href={content.contact.social.whatsapp} target="_blank" rel="noreferrer" className="social-pill whatsapp">
@@ -544,32 +557,42 @@ const App = () => {
     }, [isDark]);
 
     const commonProps = { content, isDark };
+    useEffect(() => {
+    document.title = "Título de la página";
+
+    let meta = document.querySelector("meta[name='description']");
+    if (!meta) {
+        meta = document.createElement("meta");
+        meta.name = "description";
+        document.head.appendChild(meta);
+    }
+    meta.content = "Descripción de la página";
+}, []);
 
     return (
-        <HelmetProvider>
-            <Router>
-                <div className={`app-wrapper ${isDark ? 'dark' : 'light'}`}>
-                    <MatrixBackground isDark={isDark} />
-                    <GlobalCustomCursor isDark={isDark} />
-                    
-                    <Navbar content={content} isDark={isDark} setIsDark={setIsDark} setLang={setLang} />
-                    
-                    <main className="main-content">
-                        <Routes>
-                            <Route path="/" element={<HeroSection colors={{accent_bg: 'bg-emerald-500', accent_border: 'border-emerald-500', accent: 'text-emerald-400'}} {...commonProps} />} />
-                            <Route path="/about" element={<AboutMe {...commonProps} />} />
-                            <Route path="/skills" element={<SkillsGraph {...commonProps} />} />
-                            <Route path="/projects" element={<ProjectsConsole {...commonProps} />} />
-                            <Route path="/contact" element={<ContactSection {...commonProps} />} />
-                            <Route path="*" element={<NotFound {...commonProps} />} />
-                        </Routes>
-                    </main>
-                    
-                    <Footer isDark={isDark} />
-                </div>
-            </Router>
-        </HelmetProvider>
-    );
+    <Router>
+        <div className={`app-wrapper ${isDark ? 'dark' : 'light'}`}>
+            <MatrixBackground isDark={isDark} />
+            <GlobalCustomCursor isDark={isDark} />
+            
+            <Navbar content={content} isDark={isDark} setIsDark={setIsDark} setLang={setLang} />
+            
+            <main className="main-content">
+                <Routes>
+                    <Route path="/" element={<HeroSection colors={{accent_bg: 'bg-emerald-500', accent_border: 'border-emerald-500', accent: 'text-emerald-400'}} {...commonProps} />} />
+                    <Route path="/about" element={<AboutMe {...commonProps} />} />
+                    <Route path="/skills" element={<SkillsGraph {...commonProps} />} />
+                    <Route path="/projects" element={<ProjectsConsole {...commonProps} />} />
+                    <Route path="/contact" element={<ContactSection {...commonProps} />} />
+                    <Route path="*" element={<NotFound {...commonProps} />} />
+                </Routes>
+            </main>
+            
+            <Footer isDark={isDark} />
+        </div>
+    </Router>
+);
+
 };
 
 export default App;
