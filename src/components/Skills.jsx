@@ -1,9 +1,9 @@
 import React from 'react';
-import { Code, PenTool, Server, Database, GitBranch, Cpu, Cloud } from 'lucide-react';
+import { Code, PenTool, Server, Database, GitBranch, Cpu, Cloud, Globe } from 'lucide-react';
 import { RevealOnScroll, SpotlightCard } from './UI';
 
 const SkillsGraph = ({ content, isDark }) => {
-    const icons = { Code, PenTool, Server, Database, GitBranch, Cpu, Cloud };
+    const icons = { Code, PenTool, Server, Database, GitBranch, Cpu, Cloud, Globe };
     return (
         <section id="skills" className="section-container">
             <RevealOnScroll>

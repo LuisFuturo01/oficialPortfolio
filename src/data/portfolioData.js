@@ -23,7 +23,7 @@ export const portfolioData = {
             { id: 'be', name: "Backend", stack: ["Node.js", "Django", "PHP", "Laravel"], icon: "Server" },
             { id: 'db', name: "Datos", stack: ["PostgreSQL", "MongoDB", "SQL Server", "Redis"], icon: "Database" },
             { id: 'tools', name: "Herramientas", stack: ["Git/GitHub", "Docker", "Xampp", "Wordpress", "Notion", "Figma"], icon: "GitBranch" },
-            { id: 'speak', name: "Idiomas", stack: ["Español", "Inglés", "Portugués", "Francés"], icon: "Language" },
+            { id: 'speak', name: "Idiomas", stack: ["Español", "Inglés", "Portugués", "Francés"], icon: "Globe" },
         ],
         projects: [
             { 
@@ -89,7 +89,7 @@ export const portfolioData = {
             { id: 'be', name: "Backend", stack: ["Node.js", "Django", "PHP", "Laravel"], icon: "Server" },
             { id: 'db', name: "Database", stack: ["PostgreSQL", "MongoDB", "SQL Server", "Firebase", "MySQL"], icon: "Database" },
             { id: 'tools', name: "Tools", stack: ["Git/GitHub", "Docker", "Xampp", "Wordpress", "Notion", "Figma"], icon: "GitBranch" },
-            { id: 'speak', name: "Languages", stack: ["Spanish", "English", "Portuguese", "French"], icon: "Language" },
+            { id: 'speak', name: "Languages", stack: ["Spanish", "English", "Portuguese", "French"], icon: "Globe" },
         ],
         projects: [
             { 

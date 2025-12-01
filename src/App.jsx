@@ -7,7 +7,10 @@ import './styles.scss';
 // Datos
 import { portfolioData } from './data/portfolioData';
 
-// Componentes UI globales
+// Hooks (IMPORTADO, NO DEFINIDO AQUÍ)
+import { useDynamicTitle } from './hooks/usePortfolioHooks';
+
+// Componentes UI globales (Matrix, Cursor)
 import { MatrixBackground, GlobalCustomCursor } from './components/UI';
 
 // Secciones / Páginas
@@ -20,28 +23,17 @@ import ContactSection from './components/Contact';
 import Footer from './components/Footer';
 import NotFound from './components/NotFound';
 
-// Hook de título (mantenido localmente por simplicidad o puedes moverlo a UI.jsx)
-const useDynamicTitle = (name) => {
-    const titles = useMemo(() => [`${name} | Full Stack`, `[STATUS: ONLINE]`, `Luis Zeballos`], [name]);
-    useEffect(() => {
-        let index = 0;
-        const interval = setInterval(() => {
-            document.title = titles[index];
-            index = (index + 1) % titles.length;
-        }, 5000);
-        return () => clearInterval(interval);
-    }, [titles]);
-};
-
 const App = () => {
     const [isDark, setIsDark] = useState(true);
     const [lang, setLang] = useState('es');
     
-    // Carga de datos
+    // Obtener data basada en el idioma
     const content = useMemo(() => portfolioData[lang], [lang]);
+    
+    // Usar el hook importado para el título
     useDynamicTitle(content.personal_data.name);
 
-    // Efecto de tema en el body
+    // Efecto para cambiar la clase del body (Theme)
     useEffect(() => {
         document.body.className = isDark ? 'theme-dark' : 'theme-light';
     }, [isDark]);
@@ -73,7 +65,6 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={
                             <HeroSection 
-                                // Pasamos el prop 'colors' tal como estaba en tu original
                                 colors={{accent_bg: 'bg-emerald-500', accent_border: 'border-emerald-500', accent: 'text-emerald-400'}} 
                                 {...commonProps} 
                             />
