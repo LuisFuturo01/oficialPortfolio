@@ -14,8 +14,8 @@ const AboutMe = ({ content, isDark }) => (
                     <p>{content.about.p1}</p>
                     <p>{content.about.p2}</p>
                     <div className="about-actions">
-                        <a href="https://drive.google.com/file/d/1_FCKd0YzGllDnDhC3NTYuSz6Yp5YoLi8/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="btn-highlight large">
-                            <Eye size={22} className="icon-mr" /> Ver PDF Online
+                        <a href="https://drive.google.com/file/d/1ERtkPq25x1BRZsm-8uydchcKPsXLftXo/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="btn-highlight large">
+                            <Eye size={22} className="icon-mr" /> Ver CV Online
                         </a>
                     </div>
                 </div>

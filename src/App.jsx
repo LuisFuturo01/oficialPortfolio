@@ -1,19 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Estilos
 import './styles.scss';
 
-// Datos
 import { portfolioData } from './data/portfolioData';
 
-// Hooks (IMPORTADO, NO DEFINIDO AQUÍ)
 import { useDynamicTitle } from './hooks/usePortfolioHooks';
 
-// Componentes UI globales (Matrix, Cursor)
 import { MatrixBackground, GlobalCustomCursor } from './components/UI';
 
-// Secciones / Páginas
 import Navbar from './components/Navbar';
 import HeroSection from './components/Hero';
 import AboutMe from './components/About';
@@ -27,20 +22,16 @@ const App = () => {
     const [isDark, setIsDark] = useState(true);
     const [lang, setLang] = useState('es');
     
-    // Obtener data basada en el idioma
     const content = useMemo(() => portfolioData[lang], [lang]);
     
-    // Usar el hook importado para el título
     useDynamicTitle(content.personal_data.name);
 
-    // Efecto para cambiar la clase del body (Theme)
     useEffect(() => {
         document.body.className = isDark ? 'theme-dark' : 'theme-light';
     }, [isDark]);
 
     const commonProps = { content, isDark };
 
-    // Meta descripción inicial
     useEffect(() => {
         let meta = document.querySelector("meta[name='description']");
         if (!meta) {
@@ -54,13 +45,11 @@ const App = () => {
     return (
         <Router>
             <div className={`app-wrapper ${isDark ? 'dark' : 'light'}`}>
-                {/* Fondos globales */}
                 <MatrixBackground isDark={isDark} />
                 <GlobalCustomCursor isDark={isDark} />
                 
                 <Navbar content={content} isDark={isDark} setIsDark={setIsDark} setLang={setLang} />
                 
-                {/* Contenedor principal con padding para navbar fija */}
                 <main className="main-content">
                     <Routes>
                         <Route path="/" element={

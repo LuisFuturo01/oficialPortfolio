@@ -20,7 +20,7 @@ const HeroSection = ({ content }) => (
                 <h2 className="hero-subtitle">{content.hero.title}</h2>
                 <p className="hero-desc">{content.hero.intro_desc}</p>
                 <div className="hero-actions">
-                    <a href="https://drive.google.com/file/d/1_FCKd0YzGllDnDhC3NTYuSz6Yp5YoLi8/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="btn-highlight">
+                    <a href="https://drive.google.com/file/d/1ERtkPq25x1BRZsm-8uydchcKPsXLftXo/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="btn-highlight">
                         <FileText size={20} className="icon-mr" /> VER CV
                     </a>
                     <Link to="/contact" className="btn-primary">CONTACTAR</Link>
