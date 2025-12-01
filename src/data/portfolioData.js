@@ -28,24 +28,17 @@ export const portfolioData = {
         projects: [
             { 
                 id: 1, 
-                name: "E-Learning Platform", 
-                desc: "Sistema modular de aprendizaje con gestión de usuarios.", 
-                stack: "Next.js, Python, PostgreSQL",
-                links: { github: "#", demo: "#" } 
+                name: "Predictor de resultados de la Copa Libertadores", 
+                desc: "Sistema predictor de resultados de la Copa Libertadores, basado en el modelo de Poisson.", 
+                stack: "Python, HTML, CSS, JavaScript",
+                links: { github: "https://github.com/LuisFuturo01/Poisson_copa_libertadores", demo: "https://predicador-grupofav-z-s-z.onrender.com/" } 
             },
             { 
                 id: 2, 
-                name: "Financial Dashboard", 
-                desc: "Visualización de datos en tiempo real.", 
-                stack: "React, GoLang, Redis",
-                links: { github: "#", demo: null }
-            },
-            { 
-                id: 3, 
-                name: "Custom API REST", 
-                desc: "API escalable con autenticación JWT.", 
-                stack: "Node.js, Express, Mongo",
-                links: { github: "#", demo: null }
+                name: "Calculadora de integrales", 
+                desc: "Calculadora de integrales definidas y indefinidas.", 
+                stack: "HTML, CSS, JavaScript, Python",
+                links: { github: "https://github.com/LuisFuturo01/calculadoraDeIntegrales", demo: "https://calculadoradeintegrales.onrender.com/" }
             },
         ],
         sections: {
