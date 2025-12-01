@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 
+// Hook para título dinámico
 export const useDynamicTitle = (name) => {
     const titles = useMemo(() => [
         `${name} | Desarrollador Full Stack`,
@@ -17,6 +18,7 @@ export const useDynamicTitle = (name) => {
     }, [titles]);
 };
 
+// Hook para detectar si un elemento es visible en pantalla
 export const useIntersectionObserver = (options = { threshold: 0.1, rootMargin: "0px" }) => {
     const [isIntersecting, setIntersecting] = useState(false);
     const ref = useRef(null);
@@ -31,11 +33,12 @@ export const useIntersectionObserver = (options = { threshold: 0.1, rootMargin: 
 
         if (ref.current) observer.observe(ref.current);
         return () => observer.disconnect();
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return [ref, isIntersecting];
 };
 
+// Hook para seguir la posición del mouse
 export const useMouseTracker = () => {
     const [position, setPosition] = useState({ x: 0, y: 0 });
     

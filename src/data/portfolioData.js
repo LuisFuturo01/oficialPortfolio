@@ -12,29 +12,48 @@ export const portfolioData = {
             p1: "Soy Luis Alejandro Zeballos Quiroz, tengo 19 años y soy de Bolivia. Mi pasión es el desarrollo de software. He dedicado los últimos años a aprender y dominar las tecnologías que mueven la web hoy en día.",
             p2: "No me conformo con que las cosas funcionen; busco entender el porqué detrás de cada línea de código. Estoy listo para integrarme a equipos y aportar valor desde el primer día.",
             stats: [
-                { label: "Años de Práctica", value: "3+" },
+                { label: "Años de Práctica", value: "1+" },
                 { label: "Tecnologías", value: "20+" },
                 { label: "Disponibilidad", value: "100%" },
             ]
         },
         skills: [
             { id: 'core', name: "Lenguajes", stack: ["JavaScript", "TypeScript", "Python", "Java", "C#"], icon: "Code" },
-            { id: 'fe', name: "Frontend", stack: ["React", "Next.js", "TailwindCSS", "Sass", "Vite", "HTML5/CSS3"], icon: "HardHat" },
-            { id: 'be', name: "Backend", stack: ["Node.js", "PHP", "Laravel", "Python", "Django", "JAVA"], icon: "Server" },
-            { id: 'db', name: "Datos", stack: ["PostgreSQL", "MySQL", "SQL Server", "Firebase"], icon: "Database" },
-            { id: 'tools', name: "Herramientas", stack: ["Git/GitHub", "Docker", "Linux"], icon: "GitBranch" },
+            { id: 'fe', name: "Frontend", stack: ["React", "Next.js", "TailwindCSS", "HTML5/CSS3", "Bootstrap", "Sass"], icon: "PenTool" },
+            { id: 'be', name: "Backend", stack: ["Node.js", "Django", "PHP", "Laravel"], icon: "Server" },
+            { id: 'db', name: "Datos", stack: ["PostgreSQL", "MongoDB", "SQL Server", "Redis"], icon: "Database" },
+            { id: 'tools', name: "Herramientas", stack: ["Git/GitHub", "Docker", "Xampp", "Wordpress", "Notion", "Figma"], icon: "GitBranch" },
+            { id: 'speak', name: "Idiomas", stack: ["Español", "Inglés", "Portugués", "Francés"], icon: "Language" },
         ],
         projects: [
-            { id: 1, name: "E-Learning Platform", desc: "Sistema modular de aprendizaje con gestión de usuarios.", stack: "Next.js, Python, PostgreSQL" },
-            { id: 2, name: "Financial Dashboard", desc: "Visualización de datos en tiempo real.", stack: "React, GoLang, Redis" },
-            { id: 3, name: "Custom API REST", desc: "API escalable con autenticación JWT.", stack: "Node.js, Express, Mongo" },
+            { 
+                id: 1, 
+                name: "E-Learning Platform", 
+                desc: "Sistema modular de aprendizaje con gestión de usuarios.", 
+                stack: "Next.js, Python, PostgreSQL",
+                links: { github: "#", demo: "#" } 
+            },
+            { 
+                id: 2, 
+                name: "Financial Dashboard", 
+                desc: "Visualización de datos en tiempo real.", 
+                stack: "React, GoLang, Redis",
+                links: { github: "#", demo: null }
+            },
+            { 
+                id: 3, 
+                name: "Custom API REST", 
+                desc: "API escalable con autenticación JWT.", 
+                stack: "Node.js, Express, Mongo",
+                links: { github: "#", demo: null }
+            },
         ],
         sections: {
-            hero: { label: "INICIO", icon: "Zap" },
-            about: { label: "SOBRE_MÍ", icon: "User" },
-            skills: { label: "STACK_TECNOLÓGICO", icon: "Cpu" },
-            projects: { label: "PROYECTOS", icon: "Code" },
-            contact: { label: "CONTACTO", icon: "Mail" },
+            hero: { label: "INICIO", icon: "Zap", path: "/" },
+            about: { label: "SOBRE_MÍ", icon: "User", path: "/about" },
+            skills: { label: "STACK_TECNOLÓGICO", icon: "Cpu", path: "/skills" },
+            projects: { label: "PROYECTOS", icon: "Code", path: "/projects" },
+            contact: { label: "CONTACTO", icon: "Mail", path: "/contact" },
         },
         contact: {
             title: "Contáctame",
@@ -59,29 +78,48 @@ export const portfolioData = {
             p1: "I am Luis Alejandro Zeballos Quiroz, 19 years old from Bolivia. My passion is software development. I have dedicated the last few years to learning and mastering the technologies that power the web today.",
             p2: "I don't settle for things just working; I seek to understand the why behind every line of code. I am ready to join teams and add value from day one.",
             stats: [
-                { label: "Years Practice", value: "+1" },
+                { label: "Years Practice", value: "1+" },
                 { label: "Technologies", value: "20+" },
                 { label: "Availability", value: "100%" },
             ]
         },
         skills: [
             { id: 'core', name: "Languages", stack: ["JavaScript", "TypeScript", "Python", "Java", "C#"], icon: "Code" },
-            { id: 'fe', name: "Frontend", stack: ["React", "Next.js", "TailwindCSS", "Sass", "Vite", "HTML5/CSS3"], icon: "HardHat" },
-            { id: 'be', name: "Backend", stack: ["Node.js", "PHP", "Laravel", "Python", "Django", "JAVA"], icon: "Server" },
-            { id: 'db', name: "Database", stack: ["PostgreSQL", "MySQL", "SQL Server", "Firebase"], icon: "Database" },
-            { id: 'tools', name: "Tools", stack: ["Git/GitHub", "Docker", "Linux"], icon: "GitBranch" },
+            { id: 'fe', name: "Frontend", stack: ["React", "Next.js", "TailwindCSS", "HTML5/CSS3", "Bootstrap", "Sass"], icon: "PenTool" },
+            { id: 'be', name: "Backend", stack: ["Node.js", "Django", "PHP", "Laravel"], icon: "Server" },
+            { id: 'db', name: "Database", stack: ["PostgreSQL", "MongoDB", "SQL Server", "Firebase", "MySQL"], icon: "Database" },
+            { id: 'tools', name: "Tools", stack: ["Git/GitHub", "Docker", "Xampp", "Wordpress", "Notion", "Figma"], icon: "GitBranch" },
+            { id: 'speak', name: "Languages", stack: ["Spanish", "English", "Portuguese", "French"], icon: "Language" },
         ],
         projects: [
-            { id: 1, name: "E-Learning Platform", desc: "Modular learning system with user management.", stack: "Next.js, Python, PostgreSQL" },
-            { id: 2, name: "Financial Dashboard", desc: "Real-time data visualization.", stack: "React, GoLang, Redis" },
-            { id: 3, name: "Custom API REST", desc: "Scalable API with JWT authentication.", stack: "Node.js, Express, Mongo" },
+            { 
+                id: 1, 
+                name: "E-Learning Platform", 
+                desc: "Modular learning system with user management.", 
+                stack: "Next.js, Python, PostgreSQL",
+                links: { github: "#", demo: "#" }
+            },
+            { 
+                id: 2, 
+                name: "Financial Dashboard", 
+                desc: "Real-time data visualization.", 
+                stack: "React, GoLang, Redis",
+                links: { github: "#", demo: null }
+            },
+            { 
+                id: 3, 
+                name: "Custom API REST", 
+                desc: "Scalable API with JWT authentication.", 
+                stack: "Node.js, Express, Mongo",
+                links: { github: "#", demo: null }
+            },
         ],
         sections: {
-            hero: { label: "HOME", icon: "Zap" },
-            about: { label: "ABOUT_ME", icon: "User" },
-            skills: { label: "TECH_STACK", icon: "Cpu" },
-            projects: { label: "PROJECTS", icon: "Code" },
-            contact: { label: "CONTACT", icon: "Mail" },
+            hero: { label: "HOME", icon: "Zap", path: "/" },
+            about: { label: "ABOUT_ME", icon: "User", path: "/about" },
+            skills: { label: "TECH_STACK", icon: "Cpu", path: "/skills" },
+            projects: { label: "PROJECTS", icon: "Code", path: "/projects" },
+            contact: { label: "CONTACT", icon: "Mail", path: "/contact" },
         },
         contact: {
             title: "Contact Me",

@@ -789,3 +789,394 @@ body { margin: 0; font-family: $font-pixel; overflow-x: hidden; }
         &:hover svg { transform: scale(1.2); }
     }
 }
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+// --- VARIABLES ---
+// DARK MODE (Cyberpunk)
+$color-bg-dark: #020617; 
+$color-text-dark: #f1f5f9;
+$color-border-dark: #1e293b;
+
+// LIGHT MODE (Clean Tech - NUEVO)
+$color-bg-light: #f1f5f9; // Slate 100 (Gris muy suave, no blanco puro)
+$color-text-light: #0f172a; // Slate 900 (Casi negro, excelente contraste)
+$color-border-light: #cbd5e1; // Slate 300 (Bordes definidos)
+$color-card-light: #ffffff; // Tarjetas blancas puras para resaltar
+
+$color-accent: #10B981; // Emerald 500 (Base)
+$font-pixel: 'VT323', monospace;
+
+// --- RESET & BASE ---
+* { box-sizing: border-box; }
+body { 
+    margin: 0; 
+    font-family: $font-pixel; 
+    overflow-x: hidden; 
+}
+
+// --- THEME MIXINS (REFACTORIZADO) ---
+@mixin theme-colors($is-dark) {
+  @if $is-dark {
+    // Modo Oscuro: Matrix Clásico
+    background-color: $color-bg-dark;
+    color: $color-text-dark;
+    --accent-color: #10B981; // Verde Neón
+    --border-color: #{$color-border-dark};
+    --card-bg: rgba(15, 23, 42, 0.6);
+    --nav-bg: rgba(2, 6, 23, 0.85);
+    --shadow: 0 0 0 transparent; 
+    --matrix-opacity: 0.4;
+  } @else {
+    // Modo Claro: Ingeniería Limpia
+    background-color: $color-bg-light;
+    color: $color-text-light;
+    --accent-color: #059669; // Verde Bosque (Más oscuro y legible)
+    --border-color: #{$color-border-light};
+    --card-bg: #ffffff; // Blanco sólido
+    --nav-bg: rgba(255, 255, 255, 0.9);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); // Sombra suave
+    --matrix-opacity: 0.08; // Muy muy sutil, casi marca de agua
+  }
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  
+  &.dark { @include theme-colors(true); }
+  &.light { @include theme-colors(false); }
+}
+
+// --- Z-INDEX LAYERS ---
+.matrix-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: var(--matrix-opacity); transition: opacity 0.3s; }
+.global-cursor { position: fixed; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: screen; } // En light mode puede que screen no se vea, pero la mezcla de colores se ajusta
+.navbar { z-index: 100; position: fixed; top: 0; width: 100%; }
+.main-content { position: relative; z-index: 10; flex: 1; width: 100%; padding-top: 80px; }
+
+// --- BOTONES ---
+.btn-primary {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(var(--accent-color), 0.4);
+    filter: brightness(1.1);
+  }
+}
+
+.btn-highlight {
+    @extend .btn-primary;
+    background-color: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    box-shadow: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 0%; height: 100%;
+        background: var(--accent-color);
+        transition: width 0.3s ease;
+        z-index: -1;
+    }
+
+    &:hover {
+        color: white;
+        &::before { width: 100%; }
+    }
+    
+    &.large { padding: 1rem 2.5rem; font-size: 1.3rem; }
+}
+
+.icon-mr { margin-right: 0.5rem; }
+
+// --- NAVBAR ---
+.navbar {
+  backdrop-filter: blur(12px);
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.3s;
+
+  .nav-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    text-decoration: none; 
+  }
+
+  .nav-links {
+    display: none;
+    @media (min-width: 768px) { display: flex; gap: 0.5rem; }
+  }
+
+  .nav-item {
+    background: none;
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover, &.active {
+      background-color: rgba(16, 185, 129, 0.1); // Siempre un tinte verde suave
+      color: var(--accent-color);
+    }
+  }
+
+  .nav-actions { display: flex; gap: 0.75rem; align-items: center; }
+
+  .nav-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: inherit;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    transition: all 0.2s;
+    
+    &:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+  }
+}
+
+// --- HERO ---
+.hero-section {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    max-width: 1280px;
+    width: 100%;
+    padding: 2rem;
+    @media (min-width: 768px) { grid-template-columns: 1.5fr 1fr; align-items: center; }
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    @media (min-width: 768px) { font-size: 5rem; }
+    .accent-text { color: var(--accent-color); display: block; }
+  }
+
+  .hero-subtitle { font-size: 1.8rem; color: var(--accent-color); opacity: 0.9; margin-bottom: 1rem; }
+  .hero-desc { font-size: 1.3rem; opacity: 0.8; max-width: 600px; line-height: 1.6; }
+  
+  .hero-image-wrapper {
+    position: relative;
+    max-width: 320px;
+    margin: 0 auto;
+    .hero-img {
+        width: 100%;
+        border-radius: 1rem;
+        border: 2px solid var(--accent-color);
+        transition: transform 0.3s;
+        // En light mode quitamos el grayscale para que se vea más vivo
+        .app-wrapper.light & { filter: none; }
+        .app-wrapper.dark & { filter: grayscale(100%); &:hover { filter: none; } }
+    }
+  }
+}
+
+// --- SECTIONS ---
+.section-container { max-width: 1280px; margin: 0 auto; padding: 6rem 2rem; }
+.section-title {
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--accent-color);
+  .title-line { flex: 1; height: 1px; background: var(--accent-color); opacity: 0.3; }
+}
+
+// --- CARDS (Spotlight Refactorizado) ---
+.spotlight-card {
+  position: relative;
+  border-radius: 1rem;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  box-shadow: var(--shadow); // Sombra suave en light, nada en dark
+
+  &:hover { 
+    transform: translateY(-5px); 
+    border-color: var(--accent-color); 
+  }
+
+  .spotlight-overlay { position: absolute; inset: 0; pointer-events: none; transition: opacity 0.3s; }
+  .card-content { position: relative; padding: 2rem; height: 100%; }
+}
+
+// --- ABOUT ---
+.about-text {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    padding-left: 2rem;
+    border-left: 3px solid var(--accent-color); // Borde sólido
+    opacity: 0.9;
+}
+.stat-value { color: var(--accent-color); font-size: 3rem; font-weight: bold; }
+
+// --- SKILLS ---
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  @media (min-width: 640px) { grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 1024px) { grid-template-columns: repeat(3, 1fr); }
+}
+
+.skill-header {
+  display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; color: var(--accent-color);
+  .skill-icon-wrapper {
+      padding: 0.5rem;
+      background: rgba(16, 185, 129, 0.1); // Fondo verde muy suave
+      border-radius: 0.5rem;
+  }
+}
+
+.skill-tag {
+    background: rgba(16, 185, 129, 0.08); // Fondo muy transparente
+    color: inherit;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    
+    // En light mode damos borde para definir
+    .app-wrapper.light & { border-color: var(--border-color); }
+
+    &:hover {
+        background: var(--accent-color);
+        color: white;
+        border-color: var(--accent-color);
+    }
+}
+
+// --- PROJECTS ---
+.projects-grid { display: grid; gap: 4rem; }
+.project-title { font-size: 2.2rem; margin: 0.5rem 0; color: inherit; }
+.project-featured { color: var(--accent-color); font-size: 1rem; text-transform: uppercase; font-weight: bold; }
+
+.project-desc {
+  background: var(--card-bg); // Usar el fondo de tarjeta para contraste
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+.project-links { 
+    display: flex; gap: 1.5rem; margin-top: 1rem;
+    .icon-link { 
+        cursor: pointer; transition: all 0.2s; color: inherit;
+        &:hover { color: var(--accent-color); transform: scale(1.1); } 
+    }
+}
+
+.img-placeholder {
+    width: 100%; aspect-ratio: 16/9;
+    background: rgba(0,0,0,0.05);
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 0.5rem;
+    border: 2px solid var(--border-color);
+    color: var(--accent-color);
+}
+
+// --- CONTACT & FOOTER ---
+.contact-box {
+    text-align: center; max-width: 700px; margin: 0 auto; padding: 3rem;
+    border: 2px solid var(--border-color); border-radius: 1rem; background: var(--card-bg);
+    box-shadow: var(--shadow);
+    position: relative; overflow: hidden;
+}
+
+.footer-premium {
+    background: var(--nav-bg);
+    border-top: 1px solid var(--border-color);
+    padding: 3rem 1rem; margin-top: 4rem;
+    .footer-content {
+        max-width: 1280px; margin: 0 auto; display: flex; flex-direction: column;
+        align-items: center; gap: 1.5rem;
+        @media (min-width: 768px) { flex-direction: row; justify-content: space-between; }
+    }
+    .footer-social-link {
+        padding: 0.75rem; border-radius: 50%;
+        border: 1px solid var(--border-color);
+        transition: all 0.3s; color: inherit;
+        &:hover { background: var(--accent-color); color: white; border-color: var(--accent-color); }
+    }
+}
+
+.form-input {
+    width: 100%; padding: 1rem; background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    color: inherit; border-radius: 0.5rem; font-family: inherit; font-size: 1rem;
+    &:focus { outline: none; border-color: var(--accent-color); }
+}
+
+// --- MOBILE MENU ---
+.mobile-menu {
+    position: fixed; top: 80px; left: 0; width: 100%; height: calc(100vh - 80px);
+    backdrop-filter: blur(20px); display: flex; flex-direction: column; padding: 2rem;
+    transform: translateX(100%); transition: transform 0.3s; z-index: 99;
+    border-top: 1px solid var(--border-color);
+    background: var(--nav-bg); 
+    
+    &.open { transform: translateX(0); }
+    .mobile-nav-item {
+        font-size: 1.5rem; color: inherit; text-decoration: none; padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        &:hover { color: var(--accent-color); padding-left: 2rem; border-left: 4px solid var(--accent-color); }
+    }
+}

@@ -1,0 +1,51 @@
+import React, { useRef, useEffect } from 'react';
+import emailjs from "emailjs-com";
+import { MessageCircle, Instagram } from 'lucide-react';
+import { RevealOnScroll } from './UI';
+
+const ContactSection = ({ content }) => {
+    const form = useRef();
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+        emailjs.sendForm("portfolioLuis", "template_tjxa21n", form.current, "uftlo6n2RL8bs0Hh5")
+            .then(
+                () => { alert("¡Mensaje enviado exitosamente!"); form.current.reset(); },
+                (error) => { alert("Error al enviar."); console.error(error); }
+            );
+    };
+
+    useEffect(() => {
+        document.title = "Contacto | Luis Zeballos";
+    }, []);
+
+    return (
+        <section id="contact" className="section-container">
+            <RevealOnScroll>
+                <div className="contact-box">
+                    <div className="contact-glow-line"></div>
+                    <h2 className="contact-title">{content.contact.title}</h2>
+                    <p className="contact-subtitle">{content.contact.subtitle}</p>
+
+                    <div className="social-buttons-container">
+                        <a href={content.contact.social.whatsapp} target="_blank" rel="noreferrer" className="social-pill whatsapp">
+                            <MessageCircle size={22} /> <span>WhatsApp</span>
+                        </a>
+                        <a href={content.contact.social.instagram} target="_blank" rel="noreferrer" className="social-pill instagram">
+                            <Instagram size={22} /> <span>Instagram</span>
+                        </a>
+                    </div>
+
+                    <form ref={form} onSubmit={sendEmail} className="contact-form">
+                        <div className="form-group"><input type="text" name="name" placeholder="Tu Nombre" required className="form-input" /></div>
+                        <div className="form-group"><input type="email" name="email" placeholder="Tu Email" required className="form-input" /></div>
+                        <div className="form-group"><textarea name="message" rows="4" placeholder="Tu Mensaje" required className="form-input"></textarea></div>
+                        <button type="submit" className="btn-primary full-width">{content.contact.cta}</button>
+                    </form>
+                </div>
+            </RevealOnScroll>
+        </section>
+    );
+};
+
+export default ContactSection;
