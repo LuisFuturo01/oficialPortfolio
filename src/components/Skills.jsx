@@ -5,11 +5,11 @@ import { RevealOnScroll, SpotlightCard } from './UI';
 const SkillsGraph = ({ content, isDark }) => {
     const icons = { Code, PenTool, Server, Database, GitBranch, Cpu, Cloud, Globe };
     return (
-        <section id="skills" className="section-container">
+        <section id="skills" className="section-container" aria-labelledby="skills-title">
             <RevealOnScroll>
-                <h2 className="section-title">
-                    <span className="title-number">02.</span> {content.sections.skills.label.replace('_', ' ')}
-                    <span className="title-line"></span>
+                <h2 id="skills-title" className="section-title">
+                    <span className="title-number" aria-hidden="true">02.</span> {content.sections.skills.label.replace('_', ' ')}
+                    <span className="title-line" aria-hidden="true"></span>
                 </h2>
                 <div className="skills-grid">
                     {content.skills.map((grp) => {
@@ -17,7 +17,9 @@ const SkillsGraph = ({ content, isDark }) => {
                         return (
                             <SpotlightCard key={grp.id} isDark={isDark} className="skill-card">
                                 <div className="skill-header">
-                                    <div className="skill-icon-wrapper"><IconComp size={24} /></div>
+                                    <div className="skill-icon-wrapper" aria-hidden="true">
+                                        <IconComp size={24} />
+                                    </div>
                                     <h3>{grp.name}</h3>
                                 </div>
                                 <div className="skill-tags">

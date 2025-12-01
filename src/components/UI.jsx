@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useIntersectionObserver, useMouseTracker } from '../hooks/usePortfolioHooks';
+import { useIntersectionObserver } from '../hooks/usePortfolioHooks';
 
 export const Typewriter = ({ words, delay = 3000 }) => {
     const [text, setText] = useState('');
@@ -20,7 +20,11 @@ export const Typewriter = ({ words, delay = 3000 }) => {
         return () => clearTimeout(timer);
     }, [text, isDeleting, wordIndex, words, delay]);
 
-    return <span className="typewriter-text">{text}<span className="cursor-blink">_</span></span>;
+    return (
+        <span className="typewriter-text" aria-label={words[wordIndex]}>
+            {text}<span className="cursor-blink" aria-hidden="true">_</span>
+        </span>
+    );
 };
 
 export const RevealOnScroll = ({ children }) => {
@@ -30,18 +34,16 @@ export const RevealOnScroll = ({ children }) => {
 
 export const SpotlightCard = ({ children, className = "", isDark }) => {
     const divRef = useRef(null);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
     const [opacity, setOpacity] = useState(0);
 
     const handleMouseMove = (e) => {
         if (!divRef.current) return;
         const rect = divRef.current.getBoundingClientRect();
-        setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+        divRef.current.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        divRef.current.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
     };
 
-    const gradientColor = isDark 
-        ? 'rgba(16, 185, 129, 0.15)' 
-        : 'rgba(5, 150, 105, 0.1)'; 
+    const gradientColor = isDark ? 'rgba(16, 185, 129, 0.15)' : 'rgba(5, 150, 105, 0.1)'; 
 
     return (
         <div
@@ -50,12 +52,17 @@ export const SpotlightCard = ({ children, className = "", isDark }) => {
             onMouseEnter={() => setOpacity(1)}
             onMouseLeave={() => setOpacity(0)}
             className={`spotlight-card ${className}`}
+            style={{
+                '--mouse-x': '0px',
+                '--mouse-y': '0px'
+            }}
         >
             <div
                 className="spotlight-overlay"
                 style={{
                     opacity,
-                    background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${gradientColor}, transparent 40%)`,
+                    background: `radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), ${gradientColor}, transparent 40%)`,
+                    pointerEvents: 'none'
                 }}
             />
             <div className="card-content">{children}</div>
@@ -64,18 +71,53 @@ export const SpotlightCard = ({ children, className = "", isDark }) => {
 };
 
 export const GlobalCustomCursor = ({ isDark }) => {
-    const position = useMouseTracker();
+    const cursorRef = useRef(null);
     
-    const cursorColor = isDark 
-        ? 'rgba(52, 211, 153, 0.2)' 
-        : 'rgba(5, 150, 105, 0.15)'; 
+    useEffect(() => {
+        const cursor = cursorRef.current;
+        if (!cursor) return;
+
+        let requestRef;
+        let mouseX = 0;
+        let mouseY = 0;
+
+        const onMouseMove = (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            if (!requestRef) {
+                requestRef = requestAnimationFrame(animate);
+            }
+        };
+
+        const animate = () => {
+            cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+            cursor.style.left = '-200px'; 
+            cursor.style.top = '-200px'; 
+            requestRef = null;
+        };
+
+        window.addEventListener('mousemove', onMouseMove, { passive: true });
+        return () => {
+            window.removeEventListener('mousemove', onMouseMove);
+            if (requestRef) cancelAnimationFrame(requestRef);
+        };
+    }, []);
+
+    const cursorColor = isDark ? 'rgba(52, 211, 153, 0.2)' : 'rgba(5, 150, 105, 0.15)'; 
 
     return (
         <div
+            ref={cursorRef}
             className="global-cursor"
             style={{
-                background: `radial-gradient(400px circle at ${position.x}px ${position.y}px, ${cursorColor}, transparent 80%)`,
-                mixBlendMode: isDark ? 'screen' : 'normal', 
+                position: 'fixed',
+                pointerEvents: 'none',
+                width: '400px',
+                height: '400px',
+                background: `radial-gradient(circle, ${cursorColor}, transparent 70%)`,
+                mixBlendMode: isDark ? 'screen' : 'normal',
+                zIndex: 9999,
+                willChange: 'transform'
             }}
         />
     );
@@ -83,13 +125,14 @@ export const GlobalCustomCursor = ({ isDark }) => {
 
 export const MatrixBackground = ({ isDark }) => {
     const canvasRef = useRef(null);
-
     const matrixColor = isDark ? '#10B981' : '#059669'; 
     const fadeColor = isDark ? 'rgba(2, 6, 23, 0.05)' : 'rgba(241, 245, 249, 0.1)'; 
 
     useEffect(() => {
         const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { alpha: false }); 
+        
+        let animationFrameId;
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = document.body.scrollHeight;
         
@@ -114,22 +157,25 @@ export const MatrixBackground = ({ isDark }) => {
                 }
                 drops[i]++;
             }
+            setTimeout(() => {
+                animationFrameId = requestAnimationFrame(draw);
+            }, 50);
         };
 
-        const interval = setInterval(draw, 50);
+        draw();
         
         const handleResize = () => { 
             width = canvas.width = window.innerWidth; 
             height = canvas.height = document.body.scrollHeight; 
         };
         
-        window.addEventListener('resize', handleResize);
+        window.addEventListener('resize', handleResize, { passive: true });
         
         return () => { 
-            clearInterval(interval); 
+            cancelAnimationFrame(animationFrameId); 
             window.removeEventListener('resize', handleResize); 
         };
     }, [isDark, matrixColor, fadeColor]); 
 
-    return <canvas ref={canvasRef} className="matrix-canvas" />;
+    return <canvas ref={canvasRef} className="matrix-canvas" aria-hidden="true" />;
 };

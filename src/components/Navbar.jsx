@@ -10,40 +10,72 @@ const Navbar = ({ content, isDark, setIsDark, setLang }) => {
     useEffect(() => { setIsMenuOpen(false); }, [location]);
 
     return (
-        <nav className={`navbar ${isDark ? 'dark' : 'light'}`}>
+        <nav className={`navbar ${isDark ? 'dark' : 'light'}`} role="navigation" aria-label="Main Navigation">
             <div className="nav-content">
-                <Link to="/" className="nav-logo">LZ_DEV</Link>
+                <Link to="/" className="nav-logo" aria-label="Ir al inicio LZ_DEV">LZ_DEV</Link>
                 
                 <div className="nav-links">
                     {Object.entries(content.sections).map(([key, section]) => {
                         const IconComp = icons[section.icon] || Zap;
                         const isActive = location.pathname === section.path;
                         return (
-                            <Link key={key} to={section.path} className={`nav-item ${isActive ? 'active' : ''}`}>
-                                <IconComp size={18} /> <span>{section.label.replace('_', ' ')}</span>
+                            <Link 
+                                key={key} 
+                                to={section.path} 
+                                className={`nav-item ${isActive ? 'active' : ''}`}
+                                aria-current={isActive ? 'page' : undefined}
+                            >
+                                <IconComp size={18} aria-hidden="true" /> 
+                                <span>{section.label.replace('_', ' ')}</span>
                             </Link>
                         );
                     })}
                 </div>
 
                 <div className="nav-actions">
-                    <button onClick={() => setLang(l => l === 'es' ? 'en' : 'es')} className="nav-btn">ES/EN</button>
-                    <button onClick={() => setIsDark(!isDark)} className="nav-btn toggle-theme">
-                        {isDark ? <Sun size={24} /> : <Moon size={24} />}
+                    <button 
+                        onClick={() => setLang(l => l === 'es' ? 'en' : 'es')} 
+                        className="nav-btn"
+                        aria-label="Cambiar idioma / Change language"
+                    >
+                        ES/EN
                     </button>
-                    <button className="nav-btn mobile-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    <button 
+                        onClick={() => setIsDark(!isDark)} 
+                        className="nav-btn toggle-theme"
+                        aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+                    >
+                        {isDark ? <Sun size={24} aria-hidden="true" /> : <Moon size={24} aria-hidden="true" />}
+                    </button>
+                    <button 
+                        className="nav-btn mobile-toggle" 
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        aria-expanded={isMenuOpen}
+                        aria-controls="mobile-menu"
+                        aria-label="Menú principal"
+                    >
+                        {isMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
                     </button>
                 </div>
             </div>
 
-            <div className={`mobile-menu ${isMenuOpen ? 'open' : ''} ${isDark ? 'dark' : 'light'}`}>
+            <div 
+                id="mobile-menu"
+                className={`mobile-menu ${isMenuOpen ? 'open' : ''} ${isDark ? 'dark' : 'light'}`}
+            >
                 {Object.entries(content.sections).map(([key, section]) => {
                     const IconComp = icons[section.icon] || Zap;
                     const isActive = location.pathname === section.path;
                     return (
-                        <Link key={key} to={section.path} className={`mobile-nav-item ${isActive ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>
-                            <IconComp size={24} /> <span>{section.label.replace('_', ' ')}</span>
+                        <Link 
+                            key={key} 
+                            to={section.path} 
+                            className={`mobile-nav-item ${isActive ? 'active' : ''}`} 
+                            onClick={() => setIsMenuOpen(false)}
+                            aria-current={isActive ? 'page' : undefined}
+                        >
+                            <IconComp size={24} aria-hidden="true" /> 
+                            <span>{section.label.replace('_', ' ')}</span>
                         </Link>
                     );
                 })}

@@ -28,18 +28,45 @@ const ContactSection = ({ content }) => {
                     <p className="contact-subtitle">{content.contact.subtitle}</p>
 
                     <div className="social-buttons-container">
-                        <a href={content.contact.social.whatsapp} target="_blank" rel="noreferrer" className="social-pill whatsapp">
-                            <MessageCircle size={22} /> <span>WhatsApp</span>
+                        <a href={content.contact.social.whatsapp} target="_blank" rel="noopener noreferrer" className="social-pill whatsapp" aria-label="Contactar por WhatsApp">
+                            <MessageCircle size={22} aria-hidden="true" /> <span>WhatsApp</span>
                         </a>
-                        <a href={content.contact.social.instagram} target="_blank" rel="noreferrer" className="social-pill instagram">
-                            <Instagram size={22} /> <span>Instagram</span>
+                        <a href={content.contact.social.instagram} target="_blank" rel="noopener noreferrer" className="social-pill instagram" aria-label="Visitar perfil de Instagram">
+                            <Instagram size={22} aria-hidden="true" /> <span>Instagram</span>
                         </a>
                     </div>
 
                     <form ref={form} onSubmit={sendEmail} className="contact-form">
-                        <div className="form-group"><input type="text" name="name" placeholder="Tu Nombre" required className="form-input" /></div>
-                        <div className="form-group"><input type="email" name="email" placeholder="Tu Email" required className="form-input" /></div>
-                        <div className="form-group"><textarea name="message" rows="4" placeholder="Tu Mensaje" required className="form-input"></textarea></div>
+                        <div className="form-group">
+                            <input 
+                                type="text" 
+                                name="name" 
+                                placeholder="Tu Nombre" 
+                                required 
+                                className="form-input" 
+                                aria-label="Tu Nombre"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input 
+                                type="email" 
+                                name="email" 
+                                placeholder="Tu Email" 
+                                required 
+                                className="form-input" 
+                                aria-label="Tu Email"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <textarea 
+                                name="message" 
+                                rows="4" 
+                                placeholder="Tu Mensaje" 
+                                required 
+                                className="form-input"
+                                aria-label="Tu Mensaje"
+                            ></textarea>
+                        </div>
                         <button type="submit" className="btn-primary full-width">{content.contact.cta}</button>
                     </form>
                 </div>
