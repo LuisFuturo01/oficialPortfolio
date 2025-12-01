@@ -21,7 +21,7 @@ export const portfolioData = {
             { id: 'core', name: "Lenguajes", stack: ["JavaScript", "TypeScript", "Python", "Java", "C#"], icon: "Code" },
             { id: 'fe', name: "Frontend", stack: ["React", "Next.js", "TailwindCSS", "HTML5/CSS3", "Bootstrap", "Sass"], icon: "PenTool" },
             { id: 'be', name: "Backend", stack: ["Node.js", "Django", "PHP", "Laravel"], icon: "Server" },
-            { id: 'db', name: "Datos", stack: ["PostgreSQL", "MongoDB", "SQL Server", "Redis"], icon: "Database" },
+            { id: 'db', name: "Datos", stack: ["PostgreSQL", "MongoDB", "SQL Server", "Firebase", "MySQL"], icon: "Database" },
             { id: 'tools', name: "Herramientas", stack: ["Git/GitHub", "Docker", "Xampp", "Wordpress", "Notion", "Figma"], icon: "GitBranch" },
             { id: 'speak', name: "Idiomas", stack: ["Español", "Inglés", "Portugués", "Francés"], icon: "Globe" },
         ],
