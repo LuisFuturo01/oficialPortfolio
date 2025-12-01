@@ -10,7 +10,7 @@ export const portfolioData = {
         about: {
             title: "Sobre Mí",
             p1: "Soy Luis Alejandro Zeballos Quiroz, tengo 19 años y soy de Bolivia. Mi pasión es el desarrollo de software. He dedicado los últimos años a aprender y dominar las tecnologías que mueven la web hoy en día.",
-            p2: "No me conformo con que las cosas solo funcionen; sino busco entender el porqué detrás de cada línea de código. <br>Estoy listo para integrarme a equipos y aportar valor desde el primer día.",
+            p2: "No me conformo con que las cosas solo funcionen; sino busco entender el porqué detrás de cada línea de código. Estoy listo para integrarme a equipos y aportar valor desde el primer día.",
             stats: [
                 { label: "Años de Práctica", value: "1+" },
                 { label: "Tecnologías", value: "20+" },
