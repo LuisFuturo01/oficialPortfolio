@@ -10,14 +10,14 @@ const ContactSection = ({ content }) => {
         e.preventDefault();
         emailjs.sendForm("portfolioLuis", "template_tjxa21n", form.current, "uftlo6n2RL8bs0Hh5")
             .then(
-                () => { alert("¡Mensaje enviado exitosamente!"); form.current.reset(); },
-                (error) => { alert("Error al enviar."); console.error(error); }
+                () => { alert(content.contact.form.success_msg); form.current.reset(); },
+                (error) => { alert(content.contact.form.error_msg); console.error(error); }
             );
     };
 
     useEffect(() => {
-        document.title = "Contacto | Luis Zeballos";
-    }, []);
+        document.title = `${content.sections.contact.label} | ${content.personal_data.name}`;
+    }, [content]);
 
     return (
         <section id="contact" className="section-container">
@@ -41,30 +41,30 @@ const ContactSection = ({ content }) => {
                             <input 
                                 type="text" 
                                 name="name" 
-                                placeholder="Tu Nombre" 
+                                placeholder={content.contact.form.name_ph} 
                                 required 
                                 className="form-input" 
-                                aria-label="Tu Nombre"
+                                aria-label={content.contact.form.name_ph}
                             />
                         </div>
                         <div className="form-group">
                             <input 
                                 type="email" 
                                 name="email" 
-                                placeholder="Tu Email" 
+                                placeholder={content.contact.form.email_ph} 
                                 required 
                                 className="form-input" 
-                                aria-label="Tu Email"
+                                aria-label={content.contact.form.email_ph}
                             />
                         </div>
                         <div className="form-group">
                             <textarea 
                                 name="message" 
                                 rows="4" 
-                                placeholder="Tu Mensaje" 
+                                placeholder={content.contact.form.msg_ph} 
                                 required 
                                 className="form-input"
-                                aria-label="Tu Mensaje"
+                                aria-label={content.contact.form.msg_ph}
                             ></textarea>
                         </div>
                         <button type="submit" className="btn-primary full-width">{content.contact.cta}</button>

@@ -15,13 +15,13 @@ const AboutMe = ({ content, isDark }) => (
                     <p>{content.about.p2}</p>
                     <div className="about-actions">
                         <a 
-                            href="https://drive.google.com/file/d/1ERtkPq25x1BRZsm-8uydchcKPsXLftXo/view?usp=sharing" 
+                            href={content.personal_data.links.cv} 
                             target="_blank" 
                             rel="noopener noreferrer" 
                             className="btn-highlight large"
-                            aria-label="Ver Curriculum Vitae Online"
+                            aria-label={content.ui.view_cv_online}
                         >
-                            <Eye size={22} className="icon-mr" aria-hidden="true" /> Ver CV Online
+                            <Eye size={22} className="icon-mr" aria-hidden="true" /> {content.ui.view_cv_online}
                         </a>
                     </div>
                 </div>

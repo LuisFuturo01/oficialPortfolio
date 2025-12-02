@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AlertTriangle } from 'lucide-react';
 import { RevealOnScroll } from './UI'; 
 
-const NotFound = () => (
+const NotFound = ({ content }) => (
     <section 
         className="section-container" 
         style={{ textAlign: 'center', paddingTop: '15vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
@@ -21,15 +21,15 @@ const NotFound = () => (
             </div>
 
             <h1 id="error-title" className="contact-title" style={{ fontSize: '3rem', marginBottom: '1rem' }}>
-                ERROR: SECTOR NO ENCONTRADO
+                {content.notFound.title}
             </h1>
             
             <p className="contact-subtitle" style={{ maxWidth: '600px', margin: '0 auto 3rem auto' }}>
-                La ruta que intentas acceder no existe en este sistema o los datos han sido corrompidos.
+                {content.notFound.desc}
             </p>
             
-            <Link to="/" className="btn-primary" aria-label="Volver a la página de inicio">
-                INICIAR SECUENCIA DE RETORNO
+            <Link to="/" className="btn-primary" aria-label={content.notFound.btn}>
+                {content.notFound.btn}
             </Link>
         </RevealOnScroll>
     </section>

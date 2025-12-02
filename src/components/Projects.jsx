@@ -14,11 +14,11 @@ const ProjectsConsole = ({ content, isDark }) => (
                     <SpotlightCard key={proj.id} isDark={isDark} className="project-card">
                         <div className={`project-layout ${idx % 2 !== 0 ? 'reverse' : ''}`}>
                             <div className="project-info">
-                                <p className="project-featured">Proyecto Destacado</p>
+                                <p className="project-featured">{content.ui.project_featured}</p>
                                 <h3 className="project-title">{proj.name}</h3>
                                 <div className="project-desc">{proj.desc}</div>
                                 <div className="project-stack">
-                                    {proj.stack.split(', ').map((tech, i) => <span key={i}>{tech}</span>)}
+                                    {proj.stack.split ? proj.stack.split(', ').map((tech, i) => <span key={i}>{tech}</span>) : <span>{proj.stack}</span>}
                                 </div>
                                 
                                 <div className="project-links">
@@ -28,8 +28,8 @@ const ProjectsConsole = ({ content, isDark }) => (
                                             target="_blank" 
                                             rel="noopener noreferrer" 
                                             className="icon-link"
-                                            aria-label={`Ver código fuente de ${proj.name} en GitHub`}
-                                            title="Ver Código en GitHub"
+                                            aria-label={`${content.ui.project_github_aria} - ${proj.name}`}
+                                            title={content.ui.project_github_aria}
                                         >
                                             <Github size={24} aria-hidden="true" />
                                         </a>
@@ -41,8 +41,8 @@ const ProjectsConsole = ({ content, isDark }) => (
                                             target="_blank" 
                                             rel="noopener noreferrer" 
                                             className="icon-link"
-                                            aria-label={`Ver demostración en vivo de ${proj.name}`}
-                                            title="Ver Demo en Vivo"
+                                            aria-label={`${content.ui.project_demo_aria} - ${proj.name}`}
+                                            title={content.ui.project_demo_aria}
                                         >
                                             <ExternalLink size={24} aria-hidden="true" />
                                         </a>
@@ -50,7 +50,7 @@ const ProjectsConsole = ({ content, isDark }) => (
                                 </div>
                             </div>
                             <div className="project-image">
-                                <div className="img-placeholder" role="img" aria-label={`Imagen representativa de ${proj.name}`}>
+                                <div className="img-placeholder" role="img" aria-label={`${content.ui.project_img_aria} ${proj.name}`}>
                                     <Code size={48} />
                                 </div>
                             </div>

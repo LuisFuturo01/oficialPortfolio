@@ -1,6 +1,25 @@
 export const portfolioData = {
+  // ================= VERSIÓN ESPAÑOL =================
   es: {
-    personal_data: { name: "Luis Alejandro Zeballos Quiroz" },
+    personal_data: { 
+      name: "Luis Alejandro Zeballos Quiroz",
+      links: {
+        cv: "https://drive.google.com/file/d/1ERtkPq25x1BRZsm-8uydchcKPsXLftXo/view?usp=sharing",
+        github: "https://github.com/LuisFuturo01",
+        linkedin: "https://www.linkedin.com/in/luis-alejandro-zeballos-quiroz-324bab2b9/",
+        email: "mailto:luis.futuro.01@gmail.com"
+      }
+    },
+    ui: {
+      status: "Disponible para trabajar",
+      view_cv_btn: "VER CV",
+      view_cv_online: "Ver CV Online",
+      contact_btn: "CONTACTAR",
+      project_featured: "Proyecto Destacado",
+      project_github_aria: "Ver código fuente en GitHub",
+      project_demo_aria: "Ver demostración en vivo",
+      project_img_aria: "Imagen representativa de",
+    },
     hero: {
       title: "Desarrollador Full Stack",
       tagline: "Construyendo soluciones digitales eficientes",
@@ -108,14 +127,49 @@ export const portfolioData = {
       title: "Contáctame",
       subtitle: "Disponible para oportunidades laborales y colaboraciones.",
       cta: "Enviar Mensaje",
+      form: {
+        name_ph: "Tu Nombre",
+        email_ph: "Tu Email",
+        msg_ph: "Tu Mensaje",
+        success_msg: "¡Mensaje enviado exitosamente!",
+        error_msg: "Error al enviar el mensaje.",
+      },
       social: {
         whatsapp: "https://wa.me/59171556955",
         instagram: "https://instagram.com/zalexui",
       },
     },
+    footer: {
+      rights: "Todos los derechos reservados."
+    },
+    notFound: {
+      title: "ERROR: SECTOR NO ENCONTRADO",
+      desc: "La ruta que intentas acceder no existe en este sistema o los datos han sido corrompidos.",
+      btn: "INICIAR SECUENCIA DE RETORNO"
+    }
   },
+  
+  // ================= ENGLISH VERSION =================
   en: {
-    personal_data: { name: "Luis Alejandro Zeballos Quiroz" },
+    personal_data: { 
+      name: "Luis Alejandro Zeballos Quiroz",
+      links: {
+        cv: "https://drive.google.com/file/d/1ERtkPq25x1BRZsm-8uydchcKPsXLftXo/view?usp=sharing",
+        github: "https://github.com/LuisFuturo01",
+        linkedin: "https://www.linkedin.com/in/luis-alejandro-zeballos-quiroz-324bab2b9/",
+        email: "mailto:luis.futuro.01@gmail.com"
+      }
+    },
+    ui: {
+      status: "Available for work",
+      view_cv_btn: "VIEW CV",
+      view_cv_online: "View CV Online",
+      contact_btn: "CONTACT ME",
+      project_featured: "Featured Project",
+      project_github_aria: "View Code on GitHub",
+      project_demo_aria: "View Live Demo",
+      project_img_aria: "Representative image of",
+    },
     hero: {
       title: "Full Stack Developer",
       tagline: "Building efficient digital solutions",
@@ -190,27 +244,27 @@ export const portfolioData = {
         icon: "Globe",
       },
     ],
+    // CORRECCIÓN: TUS PROYECTOS TRADUCIDOS AL INGLÉS
     projects: [
       {
         id: 1,
-        name: "E-Learning Platform",
-        desc: "Modular learning system with user management.",
-        stack: "Next.js, Python, PostgreSQL",
-        links: { github: "#", demo: "#" },
+        name: "Copa Libertadores Predictor",
+        desc: "Result prediction system for the Copa Libertadores, based on the Poisson model.",
+        stack: "Python, HTML, CSS, JavaScript",
+        links: {
+          github: "https://github.com/LuisFuturo01/Poisson_copa_libertadores",
+          demo: "https://predicador-grupofav-z-s-z.onrender.com/",
+        },
       },
       {
         id: 2,
-        name: "Financial Dashboard",
-        desc: "Real-time data visualization.",
-        stack: "React, GoLang, Redis",
-        links: { github: "#", demo: null },
-      },
-      {
-        id: 3,
-        name: "Custom API REST",
-        desc: "Scalable API with JWT authentication.",
-        stack: "Node.js, Express, Mongo",
-        links: { github: "#", demo: null },
+        name: "Integral Calculator",
+        desc: "Calculator for definite and indefinite integrals.",
+        stack: "HTML, CSS, JavaScript, Python",
+        links: {
+          github: "https://github.com/LuisFuturo01/calculadoraDeIntegrales",
+          demo: "https://calculadoradeintegrales.onrender.com/",
+        },
       },
     ],
     sections: {
@@ -224,10 +278,25 @@ export const portfolioData = {
       title: "Contact Me",
       subtitle: "Available for job opportunities and collaborations.",
       cta: "Send Message",
+      form: {
+        name_ph: "Your Name",
+        email_ph: "Your Email",
+        msg_ph: "Your Message",
+        success_msg: "Message sent successfully!",
+        error_msg: "Error sending message.",
+      },
       social: {
         whatsapp: "https://wa.me/59171556955",
         instagram: "https://instagram.com/zalexui",
       },
     },
+    footer: {
+      rights: "All rights reserved."
+    },
+    notFound: {
+      title: "ERROR: SECTOR NOT FOUND",
+      desc: "The route you are trying to access does not exist in this system or data has been corrupted.",
+      btn: "INITIATE RETURN SEQUENCE"
+    }
   },
 };

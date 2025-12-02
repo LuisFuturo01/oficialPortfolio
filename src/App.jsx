@@ -4,9 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles.scss';
 
 import { portfolioData } from './data/portfolioData';
-
 import { useDynamicTitle } from './hooks/usePortfolioHooks';
-
 import { MatrixBackground, GlobalCustomCursor } from './components/UI';
 
 import Navbar from './components/Navbar';
@@ -22,6 +20,7 @@ const App = () => {
     const [isDark, setIsDark] = useState(true);
     const [lang, setLang] = useState('es');
     
+    // Memoizamos el contenido basado en el idioma seleccionado
     const content = useMemo(() => portfolioData[lang], [lang]);
     
     useDynamicTitle(content.personal_data.name);
@@ -39,8 +38,8 @@ const App = () => {
             meta.name = "description";
             document.head.appendChild(meta);
         }
-        meta.content = "Portafolio Luis Zeballos";
-    }, []);
+        meta.content = `Portafolio ${content.personal_data.name}`;
+    }, [content]);
 
     return (
         <Router>
@@ -62,11 +61,14 @@ const App = () => {
                         <Route path="/skills" element={<SkillsGraph {...commonProps} />} />
                         <Route path="/projects" element={<ProjectsConsole {...commonProps} />} />
                         <Route path="/contact" element={<ContactSection {...commonProps} />} />
-                        <Route path="*" element={<NotFound />} />
+                        
+                        {/* Corrección: Pasamos content a NotFound */}
+                        <Route path="*" element={<NotFound content={content} />} />
                     </Routes>
                 </main>
                 
-                <Footer isDark={isDark} />
+                {/* Corrección: Pasamos content a Footer */}
+                <Footer isDark={isDark} content={content} />
             </div>
         </Router>
     );
