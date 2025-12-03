@@ -1,11 +1,11 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import * as VitePWA from 'vite-plugin-pwa';
+import VitePWA from 'vite-plugin-pwa';
 
 export default defineConfig({
   plugins: [
     react(),
-    VitePWA.default({
+    VitePWA({
       srcDir: 'public',
       filename: 'service-worker.js',
       registerType: 'autoUpdate',
