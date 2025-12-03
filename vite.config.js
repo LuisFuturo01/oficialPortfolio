@@ -6,6 +6,8 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
+      srcDir: 'public', // Especificamos que el service worker está en la carpeta public
+      filename: 'service-worker.js',
       registerType: 'autoUpdate',
       manifest: {
         name: 'Portafolio Luis Zeballos',
@@ -15,7 +17,7 @@ export default defineConfig({
         background_color: '#00381cff',
         icons: [
           {
-            src: '/src/assets/image/profile.jpg',
+            src: '/assets/image/profile.jpg', // Ruta correcta dentro de public
             sizes: '192x192',
             type: 'image/jpeg',
           },
