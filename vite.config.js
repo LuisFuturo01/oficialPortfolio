@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
   registerType: 'autoUpdate',
-  includeAssets: ['favicon.ico', 'robots.txt'],
+  includeAssets: ['favicon.ico', 'robots.txt', 'src/assets/image/profile.jpeg'],
   manifest: {
     name: 'Portafolio Luis Zeballos',
     short_name: 'Luis Zeballos',
@@ -16,12 +16,12 @@ export default defineConfig({
     background_color: '#00381cff',
     icons: [
       {
-        src: '/assets/image/profile.jpg',
+        src: '/assets/image/profile.jpeg',
         sizes: '192x192',
         type: 'image/jpeg',
       },
       {
-        src: '/assets/image/profile.jpg',
+        src: '/assets/image/profile.jpeg',
         sizes: '512x512',
         type: 'image/jpeg',
       }
