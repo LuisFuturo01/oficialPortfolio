@@ -2,10 +2,17 @@ import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { NetworkFirst, CacheFirst } from 'workbox-strategies';
 
-// Precaching de los recursos estáticos
+// Permite activar nuevas versiones automáticamente
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
+
+// Precaching
 precacheAndRoute(self.__WB_MANIFEST || []);
 
-// Estrategia para las solicitudes de red
+// HTML → red primero
 registerRoute(
   ({ request }) => request.destination === 'document',
   new NetworkFirst({
@@ -14,31 +21,33 @@ registerRoute(
     plugins: [
       {
         cacheWillUpdate: async ({ response }) => {
-          if (response && response.ok) {
-            return response;
-          }
-          return null;
+          return response && response.ok ? response : null;
         },
       },
     ],
   })
 );
 
-// Estrategia para los recursos estáticos
+// Archivos estáticos → caché primero
 registerRoute(
   ({ request }) =>
-    request.destination === 'image' || request.destination === 'script' || request.destination === 'style',
+    ['image', 'script', 'style'].includes(request.destination),
   new CacheFirst({
     cacheName: 'static-resources',
     plugins: [
       {
         cacheWillUpdate: async ({ response }) => {
-          if (response && response.ok) {
-            return response;
-          }
-          return null;
+          return response && response.ok ? response : null;
         },
       },
     ],
+  })
+);
+
+// Fonts (opcional)
+registerRoute(
+  ({ url }) => url.origin.includes('fonts.gstatic.com'),
+  new CacheFirst({
+    cacheName: 'google-fonts-cache',
   })
 );
