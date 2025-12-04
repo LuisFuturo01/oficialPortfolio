@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FileText } from 'lucide-react';
 import { Typewriter } from './UI';
-import profileimg from '../assets/images/profile.jpeg';
+import profileimg from '/profile.jpeg';
 
 const HeroSection = ({ content }) => (
     <section className="hero-section" aria-label="Introducción">
