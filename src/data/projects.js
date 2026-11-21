@@ -350,6 +350,7 @@ export const projects = [
   // ------------------------------------------------------------------ 12
   {
     slug: 'locky',
+    primary: 'mobile', // vista que se muestra primero (app corriendo)
     category: 'mobile',
     featured: false,
     year: 2025,
@@ -369,11 +370,20 @@ export const projects = [
     stack: ['Flutter', 'Dart', 'Supabase', 'HTML', 'CSS', 'JavaScript'],
     links: { github: `${GH}/locky-sure` },
     shots: shots('locky', [
+      ['c01-bloqueo-pin', 'App: desbloqueo con PIN local o huella', 'App: unlock with local PIN or fingerprint', { desktop: false }],
+      ['c03-generador', 'App: generador de contraseñas seguras', 'App: strong password generator', { desktop: false }],
+      ['c05-patron', 'App: guardar patrones de desbloqueo (3×3 a 6×6)', 'App: store unlock patterns (3×3 to 6×6)', { desktop: false }],
+      ['c04-tarjeta', 'App: tarjetas con CVV y PIN cifrados', 'App: cards with encrypted CVV and PIN', { desktop: false }],
+      ['c02-nueva-credencial', 'App: nueva credencial cifrada con AES-256', 'App: new AES-256 encrypted credential', { desktop: false }],
+      ['c06-identidad', 'App: documentos de identidad', 'App: identity documents', { desktop: false }],
+      ['c07-seguridad', 'App: cuenta, contraseña maestra y PIN local', 'App: account, master password and local PIN', { desktop: false }],
+      ['c08-temas', 'App: 6 temas visuales', 'App: 6 visual themes', { desktop: false }],
+      ['c09-sincronizacion', 'App: sincronización con la nube (Supabase)', 'App: cloud sync (Supabase)', { desktop: false }],
       ['01-hero', 'Landing: tu bóveda privada', 'Landing: your private vault'],
-      ['02-caracteristicas', 'Características y demo interactiva', 'Features and interactive demo'],
-      ['03-versiones', 'Historial de versiones', 'Version history'],
-      ['04-instalacion', 'Guía de instalación', 'Install guide'],
-      ['05-faq', 'Preguntas frecuentes', 'FAQ'],
+      ['02-caracteristicas', 'Landing: características y demo interactiva', 'Landing: features and interactive demo'],
+      ['03-versiones', 'Landing: historial de versiones', 'Landing: version history'],
+      ['04-instalacion', 'Landing: guía de instalación', 'Landing: install guide'],
+      ['05-faq', 'Landing: preguntas frecuentes', 'Landing: FAQ'],
     ]),
   },
   // ------------------------------------------------------------------ 13
