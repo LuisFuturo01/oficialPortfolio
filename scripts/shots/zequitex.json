@@ -1,0 +1,11 @@
+{"slug":"zequitex-ecommerce","scheme":"light","storage_origin":"http://localhost:3100/servicios","storage":{"zq_admin":"{\"token\":\"demo\",\"name\":\"Luis Zeballos\"}"},"shots":[
+ {"name":"01-home","url":"http://localhost:3100/","wait":4000},
+ {"name":"02-home-coleccion","scroll":1250,"after_wait":1500},
+ {"name":"03-catalogo","url":"http://localhost:3100/productos","wait":3000},
+ {"name":"04-catalogo-filtro","click":["button:has-text('Gorras')"],"after_wait":1500},
+ {"name":"05-detalle","url":"http://localhost:3100/productos/25","wait":3000},
+ {"name":"06-carrito","click":["button:has-text('Agregar al carrito')"],"click_wait":3500},
+ {"name":"07-servicios","url":"http://localhost:3100/servicios","wait":2500},
+ {"name":"08-admin-login","url":"http://localhost:3100/admin/login","wait":2000,"eval":["localStorage.setItem('zq_admin', JSON.stringify({token:'demo',name:'Luis Zeballos'}))"]},
+ {"name":"09-admin-dashboard","url":"http://localhost:3100/admin","wait":3500}
+]}

@@ -1,0 +1,7 @@
+{"slug":"dental-crm","scheme":"light","shots":[
+ {"name":"01-dashboard","url":"http://localhost:5202/","wait":2500},
+ {"name":"02-pacientes","click":["button:has-text('Pacientes')"],"wait":300},
+ {"name":"03-citas","click":["button:has-text('Citas')"],"wait":300},
+ {"name":"04-finanzas","click":["button:has-text('Finanzas')"],"wait":300},
+ {"name":"05-inventario","click":["button:has-text('Inventario')"],"wait":300}
+]}

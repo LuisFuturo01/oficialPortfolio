@@ -1,0 +1,52 @@
+{
+ "slug": "gestion-universitaria",
+ "scheme": "light",
+ "shots": [
+  {
+   "name": "00-login",
+   "url": "http://localhost:5203/login",
+   "wait": 1200
+  },
+  {
+   "name": "01-dashboard",
+   "click_wait": 2500,
+   "fill": {
+    "form input >> nth=0": "cmendozaq",
+    "form input >> nth=1": "123456"
+   },
+   "click": [
+    "button[type=submit]"
+   ]
+  },
+  {
+   "name": "02-usuarios",
+   "url": "http://localhost:5203/usuarios",
+   "wait": 2500
+  },
+  {
+   "name": "03-oferta",
+   "url": "http://localhost:5203/oferta-academica",
+   "wait": 2500
+  },
+  {
+   "name": "04-inscripcion",
+   "url": "http://localhost:5203/inscripcion",
+   "wait": 2500
+  },
+  {
+   "name": "05-notas",
+   "url": "http://localhost:5203/notas",
+   "wait": 2500
+  },
+  {
+   "name": "06-reportes",
+   "url": "http://localhost:5203/reportes",
+   "wait": 2500
+  },
+  {
+   "name": "07-cierre",
+   "url": "http://localhost:5203/cierre-gestion",
+   "wait": 2500
+  }
+ ]
+}

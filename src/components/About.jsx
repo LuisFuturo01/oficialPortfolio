@@ -1,41 +1,46 @@
 import React from 'react';
-import { Eye } from 'lucide-react';
-import { RevealOnScroll, SpotlightCard } from './UI';
+import { FileText, MessageCircle } from 'lucide-react';
+import { Icon, Reveal } from './UI';
+import profileimg from '../assets/images/profile.jpeg';
 
-const AboutMe = ({ content, isDark }) => (
-    <section id="about" className="section-container" aria-labelledby="about-title">
-        <RevealOnScroll>
-            <h2 id="about-title" className="section-title">
-                <span className="title-number" aria-hidden="true">01.</span> {content.about.title}
-                <span className="title-line" aria-hidden="true"></span>
-            </h2>
-            <div className="about-grid">
-                <div className="about-text">
-                    <p>{content.about.p1}</p>
-                    <p>{content.about.p2}</p>
-                    <div className="about-actions">
-                        <a 
-                            href={content.personal_data.links.cv} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="btn-highlight large"
-                            aria-label={content.ui.view_cv_online}
-                        >
-                            <Eye size={22} className="icon-mr" aria-hidden="true" /> {content.ui.view_cv_online}
-                        </a>
-                    </div>
-                </div>
-                <div className="stats-grid">
-                    {content.about.stats.map((stat, i) => (
-                        <SpotlightCard key={i} isDark={isDark} className="stat-card">
-                            <span className="stat-label">{stat.label}</span>
-                            <span className="stat-value">{stat.value}</span>
-                        </SpotlightCard>
-                    ))}
-                </div>
-            </div>
-        </RevealOnScroll>
+const AboutMe = ({ content, page = false }) => {
+  const { about, ui, personal_data: me } = content;
+  return (
+    <section className={`section ${page ? 'section--page' : 'section--alt'}`} id="about">
+      <div className="container about">
+        <Reveal className="about__photo">
+          <img src={profileimg} alt={me.name} loading="lazy" />
+          <div className="about__badge">
+            <strong>{me.short}</strong>
+            <span>Full Stack · AI · Mobile</span>
+          </div>
+        </Reveal>
+        <div className="about__text">
+          <Reveal>
+            <span className="eyebrow">{about.eyebrow}</span>
+            <h2 className="section-title">{about.title}</h2>
+          </Reveal>
+          <Reveal delay={80}>
+            <p>{about.p1}</p>
+            <p>{about.p2}</p>
+            <p>{about.p3}</p>
+          </Reveal>
+          <Reveal delay={140} className="about__highlights">
+            {about.highlights.map((h) => (
+              <div key={h.text} className="highlight">
+                <span className="highlight__icon"><Icon name={h.icon} size={18} /></span>
+                {h.text}
+              </div>
+            ))}
+          </Reveal>
+          <Reveal delay={200} className="hero__actions">
+            <a href={me.links.cv} target="_blank" rel="noopener noreferrer" className="btn btn--primary"><FileText size={16} /> {ui.view_cv}</a>
+            <a href={me.links.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn--ghost"><MessageCircle size={16} /> {ui.hire}</a>
+          </Reveal>
+        </div>
+      </div>
     </section>
-);
+  );
+};
 
 export default AboutMe;

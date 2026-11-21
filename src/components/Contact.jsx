@@ -1,78 +1,65 @@
-import React, { useRef, useEffect } from 'react';
-import emailjs from "emailjs-com";
-import { MessageCircle, Instagram } from 'lucide-react';
-import { RevealOnScroll } from './UI';
+import React, { useRef, useState } from 'react';
+import emailjs from 'emailjs-com';
+import { Github, Instagram, Linkedin, Mail, MessageCircle, Send } from 'lucide-react';
+import { Reveal, SectionHeader } from './UI';
 
 const ContactSection = ({ content }) => {
-    const form = useRef();
+  const form = useRef();
+  const [status, setStatus] = useState('idle');
+  const { contact, personal_data: me } = content;
 
-    const sendEmail = (e) => {
-        e.preventDefault();
-        emailjs.sendForm("portfolioLuis", "template_tjxa21n", form.current, "uftlo6n2RL8bs0Hh5")
-            .then(
-                () => { alert(content.contact.form.success_msg); form.current.reset(); },
-                (error) => { alert(content.contact.form.error_msg); console.error(error); }
-            );
-    };
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setStatus('sending');
+    emailjs.sendForm('portfolioLuis', 'template_tjxa21n', form.current, 'uftlo6n2RL8bs0Hh5')
+      .then(() => { setStatus('ok'); form.current.reset(); })
+      .catch(() => setStatus('error'));
+  };
 
-    useEffect(() => {
-        document.title = `${content.sections.contact.label} | ${content.personal_data.name}`;
-    }, [content]);
+  const channels = [
+    { icon: MessageCircle, label: 'WhatsApp', value: '+591 71556955', href: me.links.whatsapp, cls: 'whatsapp' },
+    { icon: Mail, label: 'Email', value: me.links.email.replace('mailto:', ''), href: me.links.email, cls: 'mail' },
+    { icon: Linkedin, label: 'LinkedIn', value: 'Luis Zeballos', href: me.links.linkedin, cls: 'linkedin' },
+    { icon: Github, label: 'GitHub', value: '@LuisFuturo01', href: me.links.github, cls: 'github' },
+    { icon: Instagram, label: 'Instagram', value: '@zalexui', href: me.links.instagram, cls: 'instagram' },
+  ];
 
-    return (
-        <section id="contact" className="section-container">
-            <RevealOnScroll>
-                <div className="contact-box">
-                    <div className="contact-glow-line"></div>
-                    <h2 className="contact-title">{content.contact.title}</h2>
-                    <p className="contact-subtitle">{content.contact.subtitle}</p>
+  return (
+    <section className="section section--page" id="contact">
+      <div className="container">
+        <SectionHeader eyebrow={contact.eyebrow} title={contact.title} sub={contact.subtitle} />
+        <div className="contact">
+          <Reveal className="contact__channels">
+            {channels.map(({ icon, label, value, href, cls }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" className={`channel channel--${cls}`}>
+                <span className="channel__icon">{React.createElement(icon, { size: 20 })}</span>
+                <span><strong>{label}</strong><small>{value}</small></span>
+              </a>
+            ))}
+          </Reveal>
 
-                    <div className="social-buttons-container">
-                        <a href={content.contact.social.whatsapp} target="_blank" rel="noopener noreferrer" className="social-pill whatsapp" aria-label="Contactar por WhatsApp">
-                            <MessageCircle size={22} aria-hidden="true" /> <span>WhatsApp</span>
-                        </a>
-                        <a href={content.contact.social.instagram} target="_blank" rel="noopener noreferrer" className="social-pill instagram" aria-label="Visitar perfil de Instagram">
-                            <Instagram size={22} aria-hidden="true" /> <span>Instagram</span>
-                        </a>
-                    </div>
-
-                    <form ref={form} onSubmit={sendEmail} className="contact-form">
-                        <div className="form-group">
-                            <input 
-                                type="text" 
-                                name="name" 
-                                placeholder={content.contact.form.name_ph} 
-                                required 
-                                className="form-input" 
-                                aria-label={content.contact.form.name_ph}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input 
-                                type="email" 
-                                name="email" 
-                                placeholder={content.contact.form.email_ph} 
-                                required 
-                                className="form-input" 
-                                aria-label={content.contact.form.email_ph}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <textarea 
-                                name="message" 
-                                rows="4" 
-                                placeholder={content.contact.form.msg_ph} 
-                                required 
-                                className="form-input"
-                                aria-label={content.contact.form.msg_ph}
-                            ></textarea>
-                        </div>
-                        <button type="submit" className="btn-primary full-width">{content.contact.cta}</button>
-                    </form>
-                </div>
-            </RevealOnScroll>
-        </section>
-    );
+          <Reveal delay={100} className="contact__form">
+            <form ref={form} onSubmit={sendEmail}>
+              <div className="field-row">
+                <input className="field" type="text" name="name" placeholder={contact.form.name_ph} aria-label={contact.form.name_ph} required />
+                <input className="field" type="email" name="email" placeholder={contact.form.email_ph} aria-label={contact.form.email_ph} required />
+              </div>
+              <select className="field" name="project_type" aria-label={contact.form.type_ph} defaultValue="">
+                <option value="" disabled>{contact.form.type_ph}</option>
+                {contact.form.types.map((t) => <option key={t}>{t}</option>)}
+              </select>
+              <textarea className="field" name="message" rows="5" placeholder={contact.form.msg_ph} aria-label={contact.form.msg_ph} required />
+              <button type="submit" className="btn btn--primary btn--lg btn--block" disabled={status === 'sending'}>
+                <Send size={16} /> {status === 'sending' ? contact.form.sending : contact.cta}
+              </button>
+              {status === 'ok' && <p className="form-msg form-msg--ok">{contact.form.success_msg}</p>}
+              {status === 'error' && <p className="form-msg form-msg--error">{contact.form.error_msg}</p>}
+            </form>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default ContactSection;

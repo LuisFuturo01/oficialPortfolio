@@ -1,181 +1,82 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
+import {
+  Box, Brain, Building2, Code, Database, Globe, GraduationCap, HeartHandshake, Languages, LayoutDashboard, PenTool, Rocket, Server, ShieldCheck, ShoppingCart, Smartphone, Sparkles, Trophy, Wrench, Zap,
+} from 'lucide-react';
 import { useIntersectionObserver } from '../hooks/usePortfolioHooks';
+import { ScrambleText } from './Effects';
 
-export const Typewriter = ({ words, delay = 3000 }) => {
-    const [text, setText] = useState('');
-    const [wordIndex, setWordIndex] = useState(0);
-    const [isDeleting, setIsDeleting] = useState(false);
-    
-    useEffect(() => {
-        const currentWord = words[wordIndex];
-        const handleType = () => {
-            setText(prev => isDeleting ? currentWord.substring(0, prev.length - 1) : currentWord.substring(0, prev.length + 1));
-            if (!isDeleting && text === currentWord) setTimeout(() => setIsDeleting(true), delay);
-            else if (isDeleting && text === '') {
-                setIsDeleting(false);
-                setWordIndex((prev) => (prev + 1) % words.length);
-            }
-        };
-        const timer = setTimeout(handleType, isDeleting ? 50 : 100);
-        return () => clearTimeout(timer);
-    }, [text, isDeleting, wordIndex, words, delay]);
+// Solo los íconos usados por nombre en los datos (mantiene el bundle liviano).
+const ICONS = { Box, Brain, Building2, Code, Database, Globe, GraduationCap, HeartHandshake, Languages, LayoutDashboard, PenTool, Rocket, Server, ShieldCheck, ShoppingCart, Smartphone, Sparkles, Trophy, Wrench, Zap };
 
-    return (
-        <span className="typewriter-text" aria-label={words[wordIndex]}>
-            {text}<span className="cursor-blink" aria-hidden="true">_</span>
-        </span>
+/** Icono de lucide por nombre (con respaldo). */
+export const Icon = ({ name, size = 20, ...rest }) =>
+  React.createElement(ICONS[name] || Sparkles, { size, 'aria-hidden': true, ...rest });
+
+export const Typewriter = ({ words, delay = 2200 }) => {
+  const [text, setText] = useState('');
+  const [wordIndex, setWordIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = words[wordIndex % words.length];
+    if (!isDeleting && text === current) {
+      const t = setTimeout(() => setIsDeleting(true), delay);
+      return () => clearTimeout(t);
+    }
+    if (isDeleting && text === '') {
+      setIsDeleting(false);
+      setWordIndex((i) => (i + 1) % words.length);
+      return undefined;
+    }
+    const t = setTimeout(
+      () => setText(isDeleting ? current.slice(0, text.length - 1) : current.slice(0, text.length + 1)),
+      isDeleting ? 35 : 70,
     );
+    return () => clearTimeout(t);
+  }, [text, isDeleting, wordIndex, words, delay]);
+
+  return (
+    <span className="typewriter" aria-label={words[wordIndex % words.length]}>
+      {text}
+      <span className="typewriter__caret" aria-hidden="true" />
+    </span>
+  );
 };
 
-export const RevealOnScroll = ({ children }) => {
-    const [ref, isVisible] = useIntersectionObserver();
-    return <div ref={ref} className={`reveal-section ${isVisible ? 'is-visible' : ''}`}>{children}</div>;
+export const Reveal = ({ children, delay = 0, as = 'div', className = '' }) => {
+  const [ref, isVisible] = useIntersectionObserver();
+  return React.createElement(
+    as,
+    { ref, className: `reveal ${isVisible ? 'is-visible' : ''} ${className}`, style: { transitionDelay: `${delay}ms` } },
+    children,
+  );
 };
 
-export const SpotlightCard = ({ children, className = "", isDark }) => {
-    const divRef = useRef(null);
-    const [opacity, setOpacity] = useState(0);
+export const SectionHeader = ({ eyebrow, title, sub, center = true }) => (
+  <Reveal className={`section-header ${center ? 'is-center' : ''}`}>
+    {eyebrow && <span className="eyebrow"><ScrambleText text={eyebrow} /></span>}
+    <h2 className="section-title">{title}</h2>
+    {sub && <p className="section-sub">{sub}</p>}
+  </Reveal>
+);
 
-    const handleMouseMove = (e) => {
-        if (!divRef.current) return;
-        const rect = divRef.current.getBoundingClientRect();
-        divRef.current.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-        divRef.current.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-    };
+/** Fondo animado (aurora + grilla) — liviano, solo CSS. */
+export const Backdrop = () => (
+  <div className="backdrop" aria-hidden="true">
+    <div className="backdrop__grid" />
+    <div className="backdrop__blob backdrop__blob--a" />
+    <div className="backdrop__blob backdrop__blob--b" />
+    <div className="backdrop__blob backdrop__blob--c" />
+  </div>
+);
 
-    const gradientColor = isDark ? 'rgba(16, 185, 129, 0.15)' : 'rgba(5, 150, 105, 0.1)'; 
-
-    return (
-        <div
-            ref={divRef}
-            onMouseMove={handleMouseMove}
-            onMouseEnter={() => setOpacity(1)}
-            onMouseLeave={() => setOpacity(0)}
-            className={`spotlight-card ${className}`}
-            style={{
-                '--mouse-x': '0px',
-                '--mouse-y': '0px'
-            }}
-        >
-            <div
-                className="spotlight-overlay"
-                style={{
-                    opacity,
-                    background: `radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), ${gradientColor}, transparent 40%)`,
-                    pointerEvents: 'none'
-                }}
-            />
-            <div className="card-content">{children}</div>
-        </div>
-    );
-};
-
-export const GlobalCustomCursor = ({ isDark }) => {
-    const cursorRef = useRef(null);
-    
-    useEffect(() => {
-        const cursor = cursorRef.current;
-        if (!cursor) return;
-
-        let requestRef;
-        let mouseX = 0;
-        let mouseY = 0;
-
-        const onMouseMove = (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            if (!requestRef) {
-                requestRef = requestAnimationFrame(animate);
-            }
-        };
-
-        const animate = () => {
-            cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-            cursor.style.left = '-200px'; 
-            cursor.style.top = '-200px'; 
-            requestRef = null;
-        };
-
-        window.addEventListener('mousemove', onMouseMove, { passive: true });
-        return () => {
-            window.removeEventListener('mousemove', onMouseMove);
-            if (requestRef) cancelAnimationFrame(requestRef);
-        };
-    }, []);
-
-    const cursorColor = isDark ? 'rgba(52, 211, 153, 0.2)' : 'rgba(5, 150, 105, 0.15)'; 
-
-    return (
-        <div
-            ref={cursorRef}
-            className="global-cursor"
-            style={{
-                position: 'fixed',
-                pointerEvents: 'none',
-                width: '400px',
-                height: '400px',
-                background: `radial-gradient(circle, ${cursorColor}, transparent 70%)`,
-                mixBlendMode: isDark ? 'screen' : 'normal',
-                zIndex: 9999,
-                willChange: 'transform'
-            }}
-        />
-    );
-};
-
-export const MatrixBackground = ({ isDark }) => {
-    const canvasRef = useRef(null);
-    const matrixColor = isDark ? '#10B981' : '#059669'; 
-    const fadeColor = isDark ? 'rgba(2, 6, 23, 0.05)' : 'rgba(241, 245, 249, 0.1)'; 
-
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d', { alpha: false }); 
-        
-        let animationFrameId;
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = document.body.scrollHeight;
-        
-        const letters = '01'; 
-        const fontSize = 16;
-        const columns = Math.floor(width / fontSize);
-        const drops = Array(columns).fill(1);
-        
-        const draw = () => {
-            ctx.fillStyle = fadeColor; 
-            ctx.fillRect(0, 0, width, height);
-            
-            ctx.fillStyle = matrixColor; 
-            ctx.font = `${fontSize}px 'VT323', monospace`;
-            
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters[Math.floor(Math.random() * letters.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                
-                if (drops[i] * fontSize > height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-            setTimeout(() => {
-                animationFrameId = requestAnimationFrame(draw);
-            }, 50);
-        };
-
-        draw();
-        
-        const handleResize = () => { 
-            width = canvas.width = window.innerWidth; 
-            height = canvas.height = document.body.scrollHeight; 
-        };
-        
-        window.addEventListener('resize', handleResize, { passive: true });
-        
-        return () => { 
-            cancelAnimationFrame(animationFrameId); 
-            window.removeEventListener('resize', handleResize); 
-        };
-    }, [isDark, matrixColor, fadeColor]); 
-
-    return <canvas ref={canvasRef} className="matrix-canvas" aria-hidden="true" />;
-};
+/** Cinta infinita de tecnologías. */
+export const Marquee = ({ items }) => (
+  <div className="marquee" aria-hidden="true">
+    <div className="marquee__track">
+      {[...items, ...items].map((it, i) => (
+        <span key={i} className="marquee__item">{it}</span>
+      ))}
+    </div>
+  </div>
+);

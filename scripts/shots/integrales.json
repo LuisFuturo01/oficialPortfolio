@@ -1,0 +1,9 @@
+{"slug":"integrales","scheme":"light","shots":[
+ {"name":"01-calculadora","url":"http://localhost:5300/","wait":3000},
+ {"name":"02-resultado","fill":{"#inputFuncion":"sin(x)*x","#inputLimiteSuperior":"pi"},"click":["text=Calcular"],"click_wait":6000,"eval":[],"scroll":760},
+ {"name":"03-geogebra","scroll":1350,"after_wait":2500},
+ {"name":"04-funciones-extra","url":"http://localhost:5300/curious_functions.html","wait":6000,"until":"load"},
+ {"name":"05-estadistica","url":"http://localhost:5300/estadistica.html","wait":6000,"until":"load"},
+ {"name":"06-tablas","url":"http://localhost:5300/tables.html","wait":6000,"until":"load"},
+ {"name":"07-formulario","url":"http://localhost:5300/form.html","wait":4000,"until":"load"}
+]}

@@ -1,0 +1,7 @@
+{"slug":"umsenos-nuclear","shots":[
+ {"name":"01-inicio","url":"http://localhost/PersonalProjects/Umse%C3%B1os-Nuclear/builerz-master/index.html","wait":3000},
+ {"name":"02-inicio-scroll","scroll":900,"after_wait":1500},
+ {"name":"03-nosotros","url":"http://localhost/PersonalProjects/Umse%C3%B1os-Nuclear/builerz-master/about.html","wait":2500},
+ {"name":"04-servicios","url":"http://localhost/PersonalProjects/Umse%C3%B1os-Nuclear/builerz-master/service.html","wait":2500},
+ {"name":"05-equipo","url":"http://localhost/PersonalProjects/Umse%C3%B1os-Nuclear/builerz-master/team.html","wait":2500}
+]}

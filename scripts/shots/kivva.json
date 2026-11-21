@@ -1,0 +1,6 @@
+{"slug":"kivva","shots":[
+ {"name":"01-hero","url":"http://localhost/PersonalProjects/web-publisidad-kivva/","wait":3000},
+ {"name":"02-scroll","scroll":900,"after_wait":1500},
+ {"name":"03-galeria","eval":["document.querySelector('#galeria')?.scrollIntoView()"],"after_wait":1500},
+ {"name":"04-descargar","eval":["document.querySelector('#descargar')?.scrollIntoView()"],"after_wait":1500}
+]}

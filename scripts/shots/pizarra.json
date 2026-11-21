@@ -1,0 +1,25 @@
+{
+ "slug": "pizarra-tactica",
+ "shots": [
+  {
+   "name": "01-pizarra",
+   "url": "http://localhost/PersonalProjects/soccer/",
+   "wait": 2500
+  },
+  {
+   "name": "01b-cancha",
+   "only": "mobile",
+   "eval": [
+    "document.getElementById('pitch').scrollIntoView()"
+   ],
+   "after_wait": 1000
+  },
+  {
+   "name": "02-modo",
+   "click": [
+    "#btnMode"
+   ],
+   "click_wait": 1200
+  }
+ ]
+}

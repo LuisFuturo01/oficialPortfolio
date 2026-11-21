@@ -1,0 +1,6 @@
+{"slug":"luchopolis","shots":[
+ {"name":"01-hero","url":"http://localhost/PersonalProjects/monopoly/luchopolis-web/","wait":3000},
+ {"name":"02-juego","eval":["document.querySelector('#juego')?.scrollIntoView()"],"after_wait":1500},
+ {"name":"03-capturas","eval":["document.querySelector('#capturas')?.scrollIntoView()"],"after_wait":1500},
+ {"name":"04-descargar","eval":["document.querySelector('#descargar')?.scrollIntoView()"],"after_wait":1500}
+]}

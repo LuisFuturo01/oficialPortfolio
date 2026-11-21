@@ -1,0 +1,6 @@
+{"slug":"poisson","shots":[
+ {"name":"01-selector","url":"http://localhost:5301/","wait":5000,"until":"load"},
+ {"name":"02-probabilidades","click":["#btnPredecir"],"click_wait":5000,"scroll":900},
+ {"name":"03-marcadores","scroll":1500,"after_wait":800},
+ {"name":"04-clasico","url":"http://localhost:5301/","wait":4000,"until":"load","fill":{"#inputLocal":"Boca Juniors","#inputVisitante":"River Plate"},"click":["#btnPredecir"],"click_wait":5000,"scroll":900}
+]}

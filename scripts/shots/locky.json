@@ -1,0 +1,7 @@
+{"slug":"locky","shots":[
+ {"name":"01-hero","url":"http://localhost/PersonalProjects/locky-web/","wait":3000},
+ {"name":"02-caracteristicas","eval":["document.querySelector('#caracteristicas')?.scrollIntoView()"],"after_wait":1500},
+ {"name":"03-versiones","eval":["document.querySelector('#versiones')?.scrollIntoView()"],"after_wait":1500},
+ {"name":"04-instalacion","eval":["document.querySelector('#instalacion')?.scrollIntoView()"],"after_wait":1500},
+ {"name":"05-faq","eval":["document.querySelector('#faq')?.scrollIntoView()"],"after_wait":1500}
+]}

@@ -1,0 +1,6 @@
+{"slug":"campus-3d","shots":[
+ {"name":"01-recepcion","url":"http://localhost:5207/","wait":5000},
+ {"name":"02-sala","click":[".tour-arrow.right"],"click_wait":4000},
+ {"name":"03-comedor","click":[".tour-arrow.right"],"click_wait":4000},
+ {"name":"04-eventos","click":[".tour-arrow.right"],"click_wait":4000}
+]}

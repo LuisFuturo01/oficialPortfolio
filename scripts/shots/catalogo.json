@@ -1,0 +1,7 @@
+{"slug":"catalogo-interactivo","shots":[
+ {"name":"01-portada","url":"http://localhost:5206/","wait":3000},
+ {"name":"02-coleccion","scroll":1100,"after_wait":2000},
+ {"name":"03-producto","scroll":2200,"after_wait":2000},
+ {"name":"04-galeria","scroll":3300,"after_wait":2000},
+ {"name":"05-cierre","scroll":4600,"after_wait":2000}
+]}

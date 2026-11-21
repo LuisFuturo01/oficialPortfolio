@@ -1,0 +1,5 @@
+{"slug":"ares-twin","shots":[
+ {"name":"01-roles","url":"http://localhost:5173/","wait":4000},
+ {"name":"02-espectador","click":["text=LAPTOP"],"click_wait":12000},
+ {"name":"03-mision","url":"http://localhost/PersonalProjects/NasaSpaceApps/demo/visor_mision.html","wait":5000}
+]}

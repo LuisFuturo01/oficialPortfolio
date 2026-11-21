@@ -1,0 +1,8 @@
+{"slug":"abogados-jr","shots":[
+ {"name":"01-hero","url":"http://localhost:5205/AbogadosJR/","wait":2500},
+ {"name":"02-nosotros","scroll":900,"after_wait":1200},
+ {"name":"03-servicios","scroll":1800,"after_wait":1200},
+ {"name":"04-equipo","scroll":2700,"after_wait":1200},
+ {"name":"05-contacto","eval":["window.scrollTo(0, document.body.scrollHeight)"],"after_wait":1500},
+ {"name":"06-portafolio","url":"http://localhost:5205/AbogadosJR/portfolio","wait":2500}
+]}

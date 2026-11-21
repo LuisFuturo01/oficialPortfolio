@@ -1,31 +1,30 @@
 import React from 'react';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Github, Instagram, Linkedin, Mail, MessageCircle } from 'lucide-react';
 
 const Footer = ({ content }) => {
-    const currentYear = new Date().getFullYear();
-    
-    return (
-        <footer className="footer-premium" role="contentinfo">
-            <div className="footer-content">
-                <div className="footer-left">
-                    <p className="copyright">© {currentYear} {content.personal_data.name}</p>
-                    <p className="rights">{content.footer.rights}</p>
-                </div>
-                <div className="footer-right">
-                    <a target="_blank" rel="noopener noreferrer" href={content.personal_data.links.github} className="footer-social-link" aria-label="GitHub">
-                        <Github size={20} aria-hidden="true" />
-                    </a>
-                    <a target="_blank" rel="noopener noreferrer" href={content.personal_data.links.linkedin} className="footer-social-link" aria-label="LinkedIn">
-                        <Linkedin size={20} aria-hidden="true" />
-                    </a>
-                    <a href={content.personal_data.links.email} className="footer-social-link" aria-label="Enviar email">
-                        <Mail size={20} aria-hidden="true" />
-                    </a>
-                </div>
-            </div>
-            <div className="footer-bottom-line"></div>
-        </footer>
-    );
+  const { personal_data: me, footer, sections } = content;
+  return (
+    <footer className="footer">
+      <div className="container footer__inner">
+        <div className="footer__brand">
+          <Link to="/" className="brand">Luis Zeballos</Link>
+          <p>{footer.made}</p>
+        </div>
+        <nav className="footer__nav" aria-label="Footer">
+          {Object.entries(sections).map(([k, s]) => <Link key={k} to={s.path}>{s.label}</Link>)}
+        </nav>
+        <div className="footer__social">
+          <a href={me.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Github size={18} /></a>
+          <a href={me.links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin size={18} /></a>
+          <a href={me.links.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><MessageCircle size={18} /></a>
+          <a href={me.links.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram"><Instagram size={18} /></a>
+          <a href={me.links.email} aria-label="Email"><Mail size={18} /></a>
+        </div>
+      </div>
+      <p className="footer__copy">© {new Date().getFullYear()} {me.name}. {footer.rights}</p>
+    </footer>
+  );
 };
 
 export default Footer;

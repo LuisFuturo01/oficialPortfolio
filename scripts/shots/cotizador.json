@@ -1,0 +1,81 @@
+{
+ "slug": "cotizador-zequitex",
+ "scheme": "light",
+ "shots": [
+  {
+   "name": "01-inicio",
+   "url": "http://localhost:5204/",
+   "wait": 2000
+  },
+  {
+   "name": "02-diseno-cargado",
+   "upload": {
+    "input[type=file]": "C:/Users/usuario/AppData/Local/Temp/claude/be5134f04a389ae2/d72d5488-ede0-46f8-8fd3-9e0241b9445a/scratchpad/logo_demo.png"
+   },
+   "upload_wait": 3000,
+   "after_wait": 4000,
+   "fill": {
+    "input[placeholder*='10']": "12"
+   }
+  },
+  {
+   "name": "03-resultado",
+   "click": [
+    "button:has-text('COTIZAR BORDADO')"
+   ],
+   "click_wait": 9000,
+   "eval": []
+  },
+  {
+   "name": "04-tanteo",
+   "url": "http://localhost:5204/",
+   "wait": 1500,
+   "click": [
+    "button:has-text('Tanteo')"
+   ]
+  },
+  {
+   "name": "05-login",
+   "url": "http://localhost:5204/",
+   "wait": 1500,
+   "click": [
+    "button.settings-btn"
+   ]
+  },
+  {
+   "name": "06-config-precios",
+   "fill": {
+    "form input >> nth=0": "admin",
+    "form input >> nth=1": "demo1234"
+   },
+   "click": [
+    "button[type=submit]"
+   ],
+   "click_wait": 2500
+  },
+  {
+   "name": "07-clientes",
+   "click": [
+    "button.tab:has-text('Clientes')"
+   ]
+  },
+  {
+   "name": "08-ordenes",
+   "click": [
+    "button.tab:has-text('\u00d3rdenes')"
+   ]
+  },
+  {
+   "name": "09-historial",
+   "click": [
+    "button.tab:has-text('Historial')"
+   ]
+  },
+  {
+   "name": "10-personal",
+   "click": [
+    "button.tab:has-text('Personal')"
+   ]
+  }
+ ]
+}

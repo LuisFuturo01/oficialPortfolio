@@ -61,6 +61,7 @@ export const useIntersectionObserver = (options = { threshold: 0.1, rootMargin: 
             if (currentRef) observer.unobserve(currentRef);
             observer.disconnect();
         };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [options.threshold, options.rootMargin]); 
 
     return [ref, isIntersecting];
@@ -90,4 +91,13 @@ export const useMouseTracker = () => {
     }, []);
 
     return position;
+};
+// Bloquea el scroll del body mientras un modal está abierto
+export const useLockBody = (locked) => {
+    useEffect(() => {
+        if (!locked) return undefined;
+        const prev = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        return () => { document.body.style.overflow = prev; };
+    }, [locked]);
 };

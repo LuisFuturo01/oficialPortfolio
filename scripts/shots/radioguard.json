@@ -1,0 +1,57 @@
+{
+ "slug": "radioguard",
+ "shots": [
+  {
+   "name": "01-dashboard",
+   "url": "http://localhost:5210/",
+   "wait": 5000
+  },
+  {
+   "name": "02-panel",
+   "click": [
+    "button:has-text('Abrir Panel de Carga')"
+   ],
+   "click_wait": 1500
+  },
+  {
+   "name": "03-carga",
+   "upload": {
+    "input[type=file]": [
+     "D:/xampp/htdocs/PersonalProjects/hackatom-nuclear/proyecto-ganaderia/analyze/manzana-level_2-00012/originales/vista_1.jpg",
+     "D:/xampp/htdocs/PersonalProjects/hackatom-nuclear/proyecto-ganaderia/analyze/manzana-level_2-00012/originales/vista_2.jpg",
+     "D:/xampp/htdocs/PersonalProjects/hackatom-nuclear/proyecto-ganaderia/analyze/manzana-level_2-00012/originales/vista_3.jpg",
+     "D:/xampp/htdocs/PersonalProjects/hackatom-nuclear/proyecto-ganaderia/analyze/manzana-level_2-00012/originales/vista_4.jpg"
+    ]
+   },
+   "upload_wait": 2500
+  },
+  {
+   "name": "04-analisis",
+   "click": [
+    "button:has-text('INICIAR AN')"
+   ],
+   "click_wait": 30000
+  },
+  {
+   "name": "05-dosimetria",
+   "click": [
+    "button:has-text('Dosimetr\u00eda')"
+   ],
+   "click_wait": 3000
+  },
+  {
+   "name": "06-comparativa",
+   "click": [
+    "button:has-text('Comparativa')"
+   ],
+   "click_wait": 3000
+  },
+  {
+   "name": "07-historial",
+   "click": [
+    "button:has-text('Historial')"
+   ],
+   "click_wait": 3000
+  }
+ ]
+}

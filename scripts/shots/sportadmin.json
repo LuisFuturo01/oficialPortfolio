@@ -1,0 +1,4 @@
+{"slug":"sportadmin","scheme":"light","shots":[
+ {"name":"01-panel","url":"http://localhost/PersonalProjects/proyect_pg3/","wait":2500},
+ {"name":"02-scroll","scroll":700,"after_wait":1200}
+]}

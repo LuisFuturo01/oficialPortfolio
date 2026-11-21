@@ -1,0 +1,4 @@
+{"slug":"ajedrez-3d","shots":[
+ {"name":"01-login","url":"http://localhost:5208/","wait":3000},
+ {"name":"02-tablero","click":["button:has-text('Jugar como invitado')"],"click_wait":6000}
+]}

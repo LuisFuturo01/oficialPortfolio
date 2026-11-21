@@ -1,0 +1,41 @@
+{
+ "slug": "shaffer-laws",
+ "shots": [
+  {
+   "name": "01-inicio",
+   "url": "http://localhost:4322/",
+   "wait": 2500
+  },
+  {
+   "name": "02-areas",
+   "scroll": 1000,
+   "after_wait": 1200
+  },
+  {
+   "name": "03-equipo-home",
+   "scroll": 1900,
+   "after_wait": 1200
+  },
+  {
+   "name": "04-servicios",
+   "url": "http://localhost:4322/services",
+   "wait": 2500
+  },
+  {
+   "name": "05-equipo",
+   "url": "http://localhost:4322/team",
+   "wait": 2500,
+   "scroll": 350
+  },
+  {
+   "name": "06-blog",
+   "url": "http://localhost:4322/blog",
+   "wait": 2500
+  },
+  {
+   "name": "07-contacto",
+   "url": "http://localhost:4322/contact",
+   "wait": 2500
+  }
+ ]
+}

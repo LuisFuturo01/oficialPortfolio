@@ -1,0 +1,32 @@
+{
+ "slug": "cotizador-zequitex",
+ "scheme": "light",
+ "shots": [
+  {
+   "name": "01-inicio",
+   "url": "http://localhost:5204/",
+   "wait": 2000
+  },
+  {
+   "name": "02-diseno-cargado",
+   "upload": {
+    "input[type=file]": "C:/Users/usuario/AppData/Local/Temp/claude/be5134f04a389ae2/d72d5488-ede0-46f8-8fd3-9e0241b9445a/scratchpad/logo_demo.png"
+   },
+   "upload_wait": 3000,
+   "after_wait": 4000,
+   "fill": {
+    "input[placeholder*='10']": "12"
+   }
+  },
+  {
+   "name": "03b-costos",
+   "click": [
+    "button:has-text('COTIZAR BORDADO')"
+   ],
+   "click_wait": 9000,
+   "eval": [],
+   "scroll": 1750,
+   "only_mobile_scroll": true
+  }
+ ]
+}
